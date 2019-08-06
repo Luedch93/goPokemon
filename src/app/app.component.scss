@@ -1,0 +1,33 @@
+#card--container {
+    width: 260px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    z-index: 1;
+    position: relative;
+}
+
+@media (min-width: 425px) {
+    #card--container {
+        width: 390px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #card--container {
+        width: 520px;
+    }
+}
+
+@media (min-width: 1440px) {
+    #card--container {
+        width: 650px;
+    }
+}
+
+@media (min-width: 2560px) {
+    #card--container {
+        width: 1300px;
+    }
+}

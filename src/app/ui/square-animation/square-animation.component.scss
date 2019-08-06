@@ -1,0 +1,13 @@
+.square {
+    position: absolute;
+    bottom: 0px;
+    animation: bottomToTop 10s infinite linear;
+    overflow: hidden;
+    z-index: auto;
+    opacity: 0;
+}
+
+@keyframes bottomToTop {
+    from {bottom: 0px; opacity: 0; transform: rotate(0deg)}
+    to {bottom: 100%; opacity: 0.8; transform: rotate(135deg)}
+}

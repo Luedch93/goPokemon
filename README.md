@@ -1,27 +1,24 @@
 # GoPokemon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.3.
+A SPA to browse pokemons with a similar interface of the game [Pokemon Go](https://pokemongolive.com/en/) made with **Angular 8** and **Ngrx**. 😎
 
-## Development server
+I'm using the free API [PokeAPI](https://pokeapi.co/) to get all the pokemon data.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+To make the application start need
 
-## Code scaffolding
+* NodeJS 10v.
+* npm.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run this command in your console in the root directory.
 
-## Build
+```
+npm install
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Wait until npm install all the packages and now enter.
 
-## Running unit tests
+```
+ng serve
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Once it finish go to [http://localhost:4200/](http://localhost:4200/) and you will see the app running 👌

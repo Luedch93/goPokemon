@@ -10,28 +10,12 @@ import { PokemonService } from './services/pokemon.service';
 })
 export class AppComponent implements OnInit {
   pokemons$: Observable<any>;
-  nextUrl$: Observable<string>;
-  previousUrl$: Observable<string>;
+  pokemons: any[];
 
-  constructor(private store: Store<any>, private service: PokemonService) {
-    this.pokemons$ = store.pipe(select('pokemons'));
-    this.nextUrl$ = store.pipe(select('next'));
-    this.previousUrl$ = store.pipe(select('previous'));
-
+  constructor(private service: PokemonService) {
   }
 
   ngOnInit() {
-    this.pokemons$.subscribe(res => {
-      console.log('POKEMONS', res);
-    });
 
-    this.nextUrl$.subscribe(res => {
-      console.log('next', res);
-    });
-
-
-    this.previousUrl$.subscribe(res => {
-      console.log('previous', res);
-    });
   }
 }

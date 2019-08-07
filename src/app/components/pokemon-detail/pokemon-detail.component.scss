@@ -1,0 +1,28 @@
+#detail {
+  margin: 15px 5px;
+  width: 300px;
+}
+
+@media (min-width: 425px) {
+    #detail {
+        width: 390px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #detail {
+        width: 520px;
+    }
+}
+
+@media (min-width: 1440px) {
+    #detail {
+        width: 650px;
+    }
+}
+
+@media (min-width: 2560px) {
+    #detail {
+        width: 1300px;
+    }
+}

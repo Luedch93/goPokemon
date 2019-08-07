@@ -1,0 +1,22 @@
+<div id="slot" [ngSwitch]="type">
+  <!-- the same view can be shown in more than one case -->
+  <div *ngSwitchCase="'normal'" style="background-color: #dbdbdb">normal</div>
+  <div *ngSwitchCase="'fire'" style="background-color: #f42">fire</div>
+  <div *ngSwitchCase="'water'" style="background-color: #39f">water</div>
+  <div *ngSwitchCase="'electric'" style="background-color: #fc3">electric</div>
+  <div *ngSwitchCase="'grass'" style="background-color: #7c5">grass</div>
+  <div *ngSwitchCase="'ice'" style="background-color: #6cf">ice</div>
+  <div *ngSwitchCase="'fighting'" style="background-color: #b54">fighting</div>
+  <div *ngSwitchCase="'poison'" style="background-color: #a59">poison</div>
+  <div *ngSwitchCase="'ground'" style="background-color: #db5">ground</div>
+  <div *ngSwitchCase="'flying'" style="background-color: #89f">flying</div>
+  <div *ngSwitchCase="'psychic'" style="background-color: #f59">psychic</div>
+  <div *ngSwitchCase="'bug'" style="background-color: #ab2">bug</div>
+  <div *ngSwitchCase="'rock'" style="background-color: #ba6">rock</div>
+  <div *ngSwitchCase="'ghost'" style="background-color: #66b">ghost</div>
+  <div *ngSwitchCase="'dragon'" style="background-color: #76e">dragon</div>
+  <div *ngSwitchCase="'dark'" style="background-color: #754">dark</div>
+  <div *ngSwitchCase="'steel'" style="background-color: #aab">steel</div>
+  <div *ngSwitchCase="'fairy'" style="background-color: #e9e">fairy</div>
+  <div *ngSwitchDefault>?</div>
+</div>

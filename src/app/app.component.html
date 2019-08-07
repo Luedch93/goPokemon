@@ -1,14 +1,3 @@
-
-<search-input></search-input>
-
-<div id="card--container">
-  <poke-card *ngFor="let pokemon of pokemons$ | async"  [pokemon]="pokemon"></poke-card>
-</div>
-
-<div id="footer">
-  <pagination></pagination>
-</div>
-
 <router-outlet></router-outlet>
 
 <app-square-animation [color]="'blueviolet'" [heigth]="'16px'" [width]="'16px'" [position]="'15%'" [delay]="'0s'"></app-square-animation>

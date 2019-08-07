@@ -5,7 +5,11 @@
   <poke-card *ngFor="let pokemon of pokemons$ | async"  [pokemon]="pokemon"></poke-card>
 </div>
 
-<!-- <pagination></pagination> -->
+<div id="footer">
+  <pagination></pagination>
+</div>
+
+<router-outlet></router-outlet>
 
 <app-square-animation [color]="'blueviolet'" [heigth]="'16px'" [width]="'16px'" [position]="'15%'" [delay]="'0s'"></app-square-animation>
 <app-square-animation [color]="'white'" [heigth]="'15px'" [width]="'15px'" [position]="'90%'" [delay]="'1.5s'"></app-square-animation>

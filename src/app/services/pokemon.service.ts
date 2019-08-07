@@ -10,11 +10,13 @@ import { loadPokemons, nextSave, previousSave } from '../actions/load.actions';
 })
 export class PokemonService {
 
-  private readonly apiURL = 'https://pokeapi.co/api/v2/pokemon';
+  private apiURL: string;
   private filter$: Observable<string>;
+  private currentUrl$: Observable<string>;
 
   constructor(private http: HttpClient, private store: Store<any>) {
     this.filter$ = store.pipe(select('filter'));
+    this.currentUrl$ = store.pipe(select('apiURL'));
 
     this.filter$.pipe(
       debounceTime(500),
@@ -27,6 +29,15 @@ export class PokemonService {
         this.store.dispatch(loadPokemons({results: []}));
       });
     });
+
+    this.currentUrl$.subscribe(url => {
+      this.apiURL = url;
+      this.getPokemonsDetailed().then((res: any[]) => {
+        this.store.dispatch(loadPokemons({results: res}));
+      }, err => {
+        this.store.dispatch(loadPokemons({results: []}));
+      });
+    })
 
    }
 
@@ -43,7 +54,7 @@ export class PokemonService {
   }
 
   getPokemonDetail(name) {
-    return this.http.get(this.apiURL + `/${name}`).pipe(
+    return this.http.get(`https://pokeapi.co/api/v2/pokemon/${name}`).pipe(
       reduce((acc, item) => {
         acc.push(item);
         return acc;
@@ -70,11 +81,7 @@ export class PokemonService {
   }
 
   dispatchPrevNextUrls(pokemons) {
-    if (pokemons.next !== null) {
       this.store.dispatch(nextSave(pokemons));
-    }
-    if (pokemons.previous !== null) {
-      this.store.dispatch(previousSave(pokemons.previous));
-    }
+      this.store.dispatch(previousSave(pokemons));
   }
 }

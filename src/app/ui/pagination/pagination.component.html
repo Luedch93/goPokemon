@@ -1,4 +1,4 @@
-<div>
-    <button>Previous</button>
-    <button>Next</button>
+<div id="navigation">
+    <button [disabled]="!previousUrl" (click)="goPrevious()">Previous</button>
+    <button [disabled]="!nextUrl" (click)="goNext()">Next</button>
 </div>

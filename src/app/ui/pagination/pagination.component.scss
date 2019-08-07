@@ -1,0 +1,29 @@
+
+#navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 10px);
+  margin: 0 5px;
+
+  button {
+      background-color: rgb(138, 43, 226);
+      color: #fff;
+      border: 0px;
+      height: 35px;
+      width: 65px;
+      border-radius: 15px;
+      transition: background-color 0.5s;
+  }
+  button:hover {
+    background-color: rgb(148, 63, 228);
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background-color: rgb(166, 112, 218);
+    color: #fff;
+    cursor: not-allowed;
+  }
+}

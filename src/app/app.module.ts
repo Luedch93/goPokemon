@@ -7,11 +7,11 @@ import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { loadReducer, saveReducer, previousReducer, nextReducer } from './reducers/load.reducers';
+import { loadReducer, saveReducer, previousReducer, nextReducer, currentUrlReducer } from './reducers/load.reducers';
 import { PokeCardComponent } from './ui/poke-card/poke-card.component';
 import { SquareAnimationComponent } from './ui/square-animation/square-animation.component';
 import { SearchInputComponent } from './ui/search-input/search-input.component';
-import { PaginationComponent } from './ui/pagination/pagination.component'; 
+import { PaginationComponent } from './ui/pagination/pagination.component';
 
 
 @NgModule({
@@ -28,7 +28,12 @@ import { PaginationComponent } from './ui/pagination/pagination.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ pokemons: loadReducer, filter: saveReducer, previous: previousReducer, next: nextReducer })
+    StoreModule.forRoot({
+      pokemons: loadReducer,
+      filter: saveReducer,
+      previous: previousReducer,
+      next: nextReducer,
+      apiURL: currentUrlReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,9 @@
+<div id="chart">
+  <h4>STATS</h4>
+  <div id="chart-container">
+    <div id="bar-container" *ngFor="let stat of stats">
+      <stat-bar  [stat]="stat.base_stat"></stat-bar>
+      <span class="bar-text">{{stat.stat.name}}</span>
+    </div>
+  </div>
+</div>

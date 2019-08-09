@@ -15,21 +15,19 @@ export class PokemonListComponent implements OnInit {
   pokemons: any[];
 
   constructor(private store: Store<any>, private router: Router) {
-    this.pokemons$ = store.pipe(select('pokemons'));
+  }
 
+  ngOnInit() {
+    this.pokemons$ = this.store.pipe(select('pokemons'));
     this.pokemons$.subscribe(res => {
       this.pokemons = res;
     }, err => {
       console.error(err);
     });
-  }
-
-  ngOnInit() {
-
-  }
+  };
 
   public showDetail(pokemon) {
     this.store.dispatch(clickPokemon({pokemon}));
-    this.router.navigate(['pokemon', pokemon.name]);
+    return this.router.navigate(['pokemon', pokemon.name]);
   }
 }

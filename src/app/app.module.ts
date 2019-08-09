@@ -18,6 +18,8 @@ import { PokemonDetailComponent } from './components/pokemon-detail/pokemon-deta
 import { DetailCardComponent } from './ui/detail-card/detail-card.component';
 import { TypeSlotComponent } from './ui/type-slot/type-slot.component';
 import { WeightHeightPipe } from './pipes/weight-height.pipe';
+import { StatBarComponent } from './ui/stat-bar/stat-bar.component';
+import { StatChartComponent } from './ui/stat-chart/stat-chart.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { WeightHeightPipe } from './pipes/weight-height.pipe';
     PokemonDetailComponent,
     DetailCardComponent,
     TypeSlotComponent,
-    WeightHeightPipe
+    WeightHeightPipe,
+    StatBarComponent,
+    StatChartComponent
   ],
   imports: [
     BrowserModule,

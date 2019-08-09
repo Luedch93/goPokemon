@@ -1,24 +1,11 @@
-<div
-  style="
-    background-color: white;
-    color: black;
-    padding: 5px;
-    position: relative;
-    z-index: 1;
-    width: calc(100% - 10px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-  "
->
+<div id="detail-card">
   <img src="{{pokemon.sprites.front_default}}" alt="">
   <h1>{{pokemon.name | titlecase}}</h1>
   <div class="card--bar"></div>
   <div class="slot--container">
     <type-slot *ngFor="let type of types" [type]="type"></type-slot>
   </div>
+
   <div class="card--heightWeight">
     <div class="height">
       <span class="title">Heigth</span>
@@ -30,4 +17,6 @@
       <span>{{ pokemon.weight | weightHeight:"weight"}}</span>
     </div>
   </div>
+
+  <stat-chart [stats]="pokemon.stats"></stat-chart>
 </div>

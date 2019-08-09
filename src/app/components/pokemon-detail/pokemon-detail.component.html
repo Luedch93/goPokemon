@@ -1,4 +1,4 @@
 <div id="detail">
   <detail-card *ngIf="pokemon" [pokemon]="pokemon"></detail-card>
+  <not-found-card *ngIf="!pokemon"></not-found-card>
 </div>
-

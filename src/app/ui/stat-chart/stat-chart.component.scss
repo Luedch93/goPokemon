@@ -1,0 +1,39 @@
+#chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  width: 100%;
+
+  #chart-container {
+    width: 282px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  #bar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 9px;
+    margin: 5px 5px;
+    width: 84px;
+    text-transform: uppercase;
+    .bar-text {
+      margin-top: 5px;
+    }
+  }
+
+}
+
+@media (min-width: 1440px) {
+    #chart-container {
+        width: 636px !important;
+        #bar-container {
+          font-size: 10px;
+          width: 96px;
+        }
+    }
+}

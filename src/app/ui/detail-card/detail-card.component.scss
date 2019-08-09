@@ -1,52 +1,69 @@
-.card--bar {
-    height: 5px;
-    background-color: rgb(74, 235, 157);
-    width: 50%;
-    border-radius: 5px;
-    margin-top: 5px;
-}
-
-.slot--container {
+#detail-card {
+  background-color: white;
+  color: black;
+  padding: 5px;
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 10px);
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-top: 5px;
-
-  type-slot {
-    margin: 0 5px;
-  }
-}
-
-.card--heightWeight {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-top: 5px;
-  width: 50%;
+  border-radius: 20px;
+  .card--bar {
+      height: 5px;
+      background-color: rgb(74, 235, 157);
+      width: 50%;
+      border-radius: 5px;
+      margin-top: 5px;
+  }
+  .slot--container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 5px;
 
-  .height {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .title {
-      font-weight: bold;
-      text-transform: uppercase;
+    type-slot {
+      margin: 0 5px;
     }
   }
-  .bar{
-    height: 40px;
-    width: 2px;
-    background-color: black;
-    border-radius: 1px;
-  }
-  .weight {
+  .card--heightWeight {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    .title {
-      font-weight: bold;
-      text-transform: uppercase;
+    margin-top: 5px;
+    width: 50%;
+
+    .height {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .title {
+        font-weight: bold;
+        text-transform: uppercase;
+      }
     }
+    .bar{
+      height: 40px;
+      width: 2px;
+      background-color: black;
+      border-radius: 1px;
+    }
+    .weight {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .title {
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+    }
+  }
+  stat-chart {
+    width: 100%;
   }
 }
+
+
+

@@ -1,0 +1,30 @@
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'stat-bar',
+  templateUrl: './stat-bar.component.html',
+  styleUrls: ['./stat-bar.component.scss']
+})
+export class StatBarComponent implements OnInit {
+  @Input() stat: number;
+  maxStat = 267;
+  content = '5%';
+
+  constructor() { }
+
+  ngOnInit() {
+    const timer = setInterval(() => {
+      this.content = this.calcPercentage(Math.floor(Math.random() * 267));
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(timer);
+      this.content = this.calcPercentage(this.stat);
+    }, 3000);
+  }
+
+  private calcPercentage(stat: number) {
+    return `${(stat / this.maxStat) * 100}%`;
+  }
+
+}

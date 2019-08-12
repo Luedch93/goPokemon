@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+
 import { loadPokemons, saveFilter, nextSave, previousSave, currentUrlSave, clickPokemon } from '../actions/load.actions';
 
 export const initialLoadState = null;

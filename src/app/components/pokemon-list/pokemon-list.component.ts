@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { clickPokemon } from 'src/app/actions/load.actions';
 import { Router } from '@angular/router';
+
+import { clickPokemon } from 'src/app/actions/load.actions';
 
 @Component({
   selector: 'app-pokemon-list',

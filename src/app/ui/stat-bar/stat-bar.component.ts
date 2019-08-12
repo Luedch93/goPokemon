@@ -24,7 +24,7 @@ export class StatBarComponent implements OnInit {
   }
 
   private calcPercentage(stat: number) {
-    return `${(stat / this.maxStat) * 100}%`;
+    return `${Math.floor((stat / this.maxStat) * 100)}%`;
   }
 
 }

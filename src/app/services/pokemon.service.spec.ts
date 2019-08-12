@@ -1,14 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-
 import { PokemonService } from './pokemon.service';
 import { HttpClientModule } from '@angular/common/http';
-import { StoreModule, Store } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
+
 import { loadReducer, saveReducer, previousReducer, nextReducer, currentUrlReducer, pokemonReducer } from '../reducers/load.reducers';
 
 describe('PokemonService', () => {
 
   let service: PokemonService;
-  let store;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

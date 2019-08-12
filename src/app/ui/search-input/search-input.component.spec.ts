@@ -1,10 +1,10 @@
 import { TestBed, fakeAsync, tick, ComponentFixture, async } from "@angular/core/testing";
 import { FormsModule } from '@angular/forms';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-
-import { SearchInputComponent } from './search-input.component';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
+
+import { SearchInputComponent } from './search-input.component';
 
 
 describe('searchInput', () => {
@@ -29,10 +29,10 @@ describe('searchInput', () => {
   }));
 
   beforeEach(() => {
-    comp = TestBed.get(SearchInputComponent);
     store = TestBed.get(Store);
     store.setState({filter: ''});
     fixture = TestBed.createComponent(SearchInputComponent);
+    comp = TestBed.get(SearchInputComponent);
   });
 
   it('should be created', () => {
@@ -47,7 +47,19 @@ describe('searchInput', () => {
     expect(comp.value).toBe('');
   }));
 
-  it('should change the state for every keyup event', () => {
-    // TODO: finish this test.
-  })
+  it('should match the input value with the component', fakeAsync(() => {
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      store.setState({filter: 'pikachu'});
+      tick();
+      fixture.detectChanges();
+      comp.ngOnInit();
+      const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
+      inputEl.dispatchEvent(new Event('input'));
+      tick();
+      fixture.detectChanges();
+      expect(comp.value).toBe('pikachu');
+      expect(inputEl.value).toBe('pikachu');
+    });
+  }));
 });

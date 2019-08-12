@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { currentUrlSave, saveFilter } from '../../actions/load.actions';
+import { currentUrlSave } from '../../actions/load.actions';
 @Component({
   selector: 'pagination',
   templateUrl: './pagination.component.html',
@@ -15,11 +15,11 @@ export class PaginationComponent implements OnInit {
   previousUrl: string;
 
   constructor(private store: Store<any>) {
-    this.nextUrl$ = store.pipe(select('next'));
-    this.previousUrl$ = store.pipe(select('previous'));
   }
 
   ngOnInit() {
+    this.nextUrl$ = this.store.pipe(select('next'));
+    this.previousUrl$ = this.store.pipe(select('previous'));
     this.nextUrl$.subscribe(res => {
       this.nextUrl = res;
     })

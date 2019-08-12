@@ -3,7 +3,6 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
-import { clickPokemon } from '../../actions/load.actions';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({

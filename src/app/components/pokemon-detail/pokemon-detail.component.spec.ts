@@ -2,9 +2,6 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
 
 import { DetailCardComponent } from 'src/app/ui/detail-card/detail-card.component';
 import { NotFoundCardComponent } from 'src/app/ui/not-found-card/not-found-card.component';

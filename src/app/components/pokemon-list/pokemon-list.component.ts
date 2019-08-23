@@ -27,8 +27,8 @@ export class PokemonListComponent implements OnInit {
     });
   };
 
-  public showDetail(pokemon) {
-    this.store.dispatch(clickPokemon({pokemon}));
-    return this.router.navigate(['pokemon', pokemon.name]);
-  }
+  // public showDetail(pokemon) {
+  //   this.store.dispatch(clickPokemon({pokemon}));
+  //   return this.router.navigate(['pokemon', pokemon.name]);
+  // }
 }

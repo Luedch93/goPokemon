@@ -16,8 +16,7 @@ jobs:
     docker:
       - image: circleci/node:10.15.3-browsers
     steps:
-      - restore_cache:
-          key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
+      - checkout
       - run: xvfb-run -a npm run test -- --watch=false --no-progress --browsers=ChromeHeadless
 
 workflows:

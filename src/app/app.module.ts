@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, InjectionToken } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducerMap } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ import { WeightHeightPipe } from './pipes/weight-height.pipe';
 import { StatBarComponent } from './ui/stat-bar/stat-bar.component';
 import { StatChartComponent } from './ui/stat-chart/stat-chart.component';
 
+export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<any>>('root reducer');
 
 @NgModule({
   declarations: [
@@ -44,15 +45,21 @@ import { StatChartComponent } from './ui/stat-chart/stat-chart.component';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({
-      pokemons: loadReducer,
-      filter: saveReducer,
-      previous: previousReducer,
-      next: nextReducer,
-      apiURL: currentUrlReducer,
-      pokemon: pokemonReducer })
+    StoreModule.forRoot(REDUCER_TOKEN)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: REDUCER_TOKEN,
+      useValue: {
+        pokemons: loadReducer,
+        filter: saveReducer,
+        previous: previousReducer,
+        next: nextReducer,
+        apiURL: currentUrlReducer,
+        pokemon: pokemonReducer
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

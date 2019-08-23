@@ -1,7 +1,7 @@
-import { TestBed, fakeAsync, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, fakeAsync, async, ComponentFixture, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
-import { Store } from '@ngrx/store';
+import { Store, StoreModule, select } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +15,7 @@ import { NotFoundCardComponent } from 'src/app/ui/not-found-card/not-found-card.
 import { pokemons, pokemon } from '../../testing/data/pokemons';
 import { routes, TestComponent } from '../../testing/routes/routes';
 import { By } from '@angular/platform-browser';
+import { pokemonReducer, loadReducer } from 'src/app/reducers/load.reducers';
 
 describe('ListComponent', () => {
   let comp: PokemonListComponent;
@@ -28,6 +29,11 @@ describe('ListComponent', () => {
         RouterTestingModule.withRoutes(routes),
         FormsModule,
         BrowserAnimationsModule,
+        StoreModule.forRoot(
+          {
+          pokemons: loadReducer,
+          pokemon: pokemonReducer
+        })
       ],
       declarations: [
         PokemonListComponent,
@@ -38,8 +44,7 @@ describe('ListComponent', () => {
         TestComponent
       ],
       providers: [
-        PokemonListComponent,
-        provideMockStore(initialStatePokemons)
+        PokemonListComponent
       ]
     })
     .overrideComponent(
@@ -58,12 +63,12 @@ describe('ListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PokemonListComponent);
     store = TestBed.get<Store<any>>(Store);
-    store.setState(initialStatePokemons);
-    comp = TestBed.get(PokemonListComponent);
-  })
+    comp = fixture.componentInstance;
+  });
 
   it('Should load pokemons', () => {
     comp.ngOnInit();
+    comp.pokemons = pokemons.pokemons;
     expect(comp.pokemons.length).toBeGreaterThan(0);
   });
 
@@ -77,11 +82,22 @@ describe('ListComponent', () => {
   }));
 
   it('Should display a not found card if there is no pokemons', fakeAsync(() => {
-    store.setState({pokemons: []});
+    fixture.detectChanges();
     comp.ngOnInit();
+    comp.pokemons = [];
+    tick(1000);
     expect(comp.pokemons.length).toEqual(0);
     fixture.detectChanges();
     let div = fixture.debugElement.query(By.css('#container'));
     expect(div.nativeElement.innerText).toEqual('Pokemon not found');
   }));
+
+  it('Should change the internal state of pokemon when click a card', (done: DoneFn) => {
+    comp.ngOnInit();
+    comp.showDetail(pokemon);
+    store.pipe(select('pokemon')).subscribe(res => {
+      expect(res).toEqual(pokemon);
+      done();
+    });
+  });
 });

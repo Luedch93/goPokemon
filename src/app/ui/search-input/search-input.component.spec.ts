@@ -54,6 +54,7 @@ describe('searchInput', () => {
       tick();
       fixture.detectChanges();
       comp.ngOnInit();
+      comp.keyUp('pikachu');
       const inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
       inputEl.dispatchEvent(new Event('input'));
       tick();

@@ -1,8 +1,8 @@
 version: 2
 jobs:
-  build:
+  build1:
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:10.15.3
     steps:
       - checkout
       - restore_cache:
@@ -12,6 +12,17 @@ jobs:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - "node_modules"
-  tests:
+  build2:
+    docker:
+      - image: circleci/10.15.3-browsers
     steps:
       - run: xvfb-run -a npm run test -- --watch=false --no-progress --browsers=ChromeHeadless
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build1
+      - build2:
+        requires:
+           - build1

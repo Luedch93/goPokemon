@@ -44,3 +44,6 @@ workflows:
       - tests:
           requires:
             - build
+      - deploy
+          requires:
+            - tests

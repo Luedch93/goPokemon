@@ -34,7 +34,7 @@ jobs:
           key: AngularCircleCI-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Compile application with production flag
-          commad: xvfb-run -a npm run prod
+          commad: xvfb-run -a npm run test
 
 workflows:
   version: 2

@@ -1,20 +1,27 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('Filter App', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display only one card', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to goPokemon!');
+    page.setSearchValue();
+    expect(page.getCardsElements().count()).toEqual(1);
+  });
+
+  it('should display the correct pokemon', () => {
+    page.navigateTo();
+    page.setSearchValue();
+    expect(page.getCardsElements().count()).toEqual(1);
+    expect(page.getCardTitle().getText()).toEqual('Pikachu');
   });
 
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     expect(logs).not.toContain(jasmine.objectContaining({
       level: logging.Level.SEVERE,

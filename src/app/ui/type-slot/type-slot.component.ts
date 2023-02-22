@@ -1,15 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'type-slot',
-  templateUrl: './type-slot.component.html',
-  styleUrls: ['./type-slot.component.scss']
+  selector: "type-slot",
+  templateUrl: "./type-slot.component.html",
+  styleUrls: ["./type-slot.component.scss"],
 })
-export class TypeSlotComponent implements OnInit {
-  @Input() type: string;
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class TypeSlotComponent {
+  @Input() type!: string;
+  constructor() {}
 }

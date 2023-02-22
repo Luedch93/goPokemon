@@ -1,11 +1,14 @@
-
 <search-input></search-input>
 
 <div id="card--container">
-  <poke-card *ngFor="let pokemon of pokemons"  [pokemon]="pokemon" (click)="showDetail(pokemon)"></poke-card>
+  <poke-card
+    *ngFor="let pokemon of pokemons"
+    [pokemon]="pokemon"
+    (click)="showDetail(pokemon)"
+  ></poke-card>
 </div>
 
-<not-found-card *ngIf="pokemons && pokemons.length == 0"></not-found-card>
+<not-found-card *ngIf="pokemons && pokemons.length === 0"></not-found-card>
 
 <div id="footer" *ngIf="pokemons && pokemons.length > 0">
   <pagination></pagination>

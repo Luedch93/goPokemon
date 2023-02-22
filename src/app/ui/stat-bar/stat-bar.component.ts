@@ -1,16 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
-  selector: 'stat-bar',
-  templateUrl: './stat-bar.component.html',
-  styleUrls: ['./stat-bar.component.scss']
+  selector: "stat-bar",
+  templateUrl: "./stat-bar.component.html",
+  styleUrls: ["./stat-bar.component.scss"],
 })
 export class StatBarComponent implements OnInit {
-  @Input() stat: number;
+  @Input() stat!: number;
   maxStat = 267;
-  content = '5%';
+  content = "5%";
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     const timer = setInterval(() => {
@@ -26,5 +26,4 @@ export class StatBarComponent implements OnInit {
   private calcPercentage(stat: number) {
     return `${Math.floor((stat / this.maxStat) * 100)}%`;
   }
-
 }

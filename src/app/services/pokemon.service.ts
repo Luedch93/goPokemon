@@ -9,6 +9,7 @@ import {
 } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
 import { loadPokemons, nextSave, previousSave } from "../actions/load.actions";
+import { PokemonListResponse } from "../types/PokemonListResponse";
 
 @Injectable({
   providedIn: "root",
@@ -61,7 +62,7 @@ export class PokemonService {
   }
 
   getPokemons() {
-    return this.http.get(this.apiURL).toPromise();
+    return this.http.get<PokemonListResponse>(this.apiURL).toPromise();
   }
 
   getPokemonDetail(name: string) {
@@ -79,7 +80,7 @@ export class PokemonService {
   getPokemonsDetailed() {
     return new Promise<any>((resolve, reject) => {
       this.getPokemons().then(
-        (pokemons: any) => {
+        (pokemons: PokemonListResponse) => {
           this.dispatchPrevNextUrls(pokemons);
           const observables: any[] = [];
           pokemons.results.forEach((element: any) => {

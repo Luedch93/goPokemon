@@ -6,10 +6,15 @@ import {
   distinctUntilChanged,
   reduce,
   map,
+  filter,
 } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
 import { loadPokemons, nextSave, previousSave } from "../actions/load.actions";
-import { PokemonListResponse } from "../types/PokemonListResponse";
+import {
+  PokemonListItem,
+  PokemonListResponse,
+} from "../types/PokemonListResponse";
+import { PokemonDetailsResponse } from "../types/PokemonDetailsResponse";
 
 @Injectable({
   providedIn: "root",
@@ -27,11 +32,12 @@ export class PokemonService {
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
+        filter((value: string) => value !== ""),
         map((res) => res.toLocaleLowerCase())
       )
       .subscribe((pokemon) => {
         this.filterPokemon(pokemon).then(
-          (res: any[]) => {
+          (res) => {
             this.store.dispatch(loadPokemons({ results: res }));
           },
           (err) => {
@@ -43,8 +49,8 @@ export class PokemonService {
     this.currentUrl$.subscribe((url) => {
       this.apiURL = url;
       this.getPokemonsDetailed().then(
-        (res: any[]) => {
-          this.store.dispatch(loadPokemons({ results: res }));
+        (results) => {
+          this.store.dispatch(loadPokemons({ results }));
         },
         (err) => {
           this.store.dispatch(loadPokemons({ results: [] }));
@@ -67,27 +73,28 @@ export class PokemonService {
 
   getPokemonDetail(name: string) {
     return this.http
-      .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-      .pipe(
-        reduce((acc, item: any) => {
-          acc.push(item);
-          return acc;
-        })
-      )
+      .get<PokemonDetailsResponse>(`https://pokeapi.co/api/v2/pokemon/${name}`)
+      .pipe(map((res) => [res]))
       .toPromise();
   }
 
-  getPokemonsDetailed() {
-    return new Promise<any>((resolve, reject) => {
+  getPokemonsDetailed(): Promise<PokemonDetailsResponse[]> {
+    return new Promise<PokemonDetailsResponse[]>((resolve, reject) => {
       this.getPokemons().then(
         (pokemons: PokemonListResponse) => {
-          this.dispatchPrevNextUrls(pokemons);
-          const observables: any[] = [];
-          pokemons.results.forEach((element: any) => {
-            observables.push(this.http.get(element.url));
+          this.dispatchPrevNextUrls({
+            next: pokemons.next,
+            previous: pokemons.previous,
+          });
+          const observables: Observable<PokemonDetailsResponse>[] = [];
+          pokemons.results.forEach((pokemonListItem: PokemonListItem) => {
+            observables.push(
+              this.http.get<PokemonDetailsResponse>(pokemonListItem.url)
+            );
           });
           forkJoin(observables).subscribe(
-            (detailedPokemons) => resolve(detailedPokemons),
+            (detailedPokemons: PokemonDetailsResponse[]) =>
+              resolve(detailedPokemons),
             (err) => reject(err)
           );
         },
@@ -98,8 +105,14 @@ export class PokemonService {
     });
   }
 
-  dispatchPrevNextUrls(pokemons: any) {
-    this.store.dispatch(nextSave(pokemons));
-    this.store.dispatch(previousSave(pokemons));
+  dispatchPrevNextUrls({
+    next,
+    previous,
+  }: {
+    next: string | null;
+    previous: string | null;
+  }) {
+    this.store.dispatch(nextSave({ next: next ?? "" }));
+    this.store.dispatch(previousSave({ previous: previous ?? "" }));
   }
 }

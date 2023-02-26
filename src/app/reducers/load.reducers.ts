@@ -7,10 +7,19 @@ import {
   previousSave,
   currentUrlSave,
   clickPokemon,
+  loadPokemonsSuccess,
+  newPage,
+  newLimit,
 } from "../actions/load.actions";
+import { Pagination } from "../types/Pagination";
 
 export const initialLoadState: any = null;
 export const saveInitialState = "";
+
+export const paginatorInitialState: Pagination = {
+  limit: 20,
+  page: 1,
+};
 
 export const previousState = "";
 export const nextState = "";
@@ -23,6 +32,9 @@ export const loadReducer = createReducer(
   on(loadPokemons, (_, payload) => {
     return [...payload.results];
   })
+  // on(loadPokemonsSuccess, (_, payload) => {
+  //   return payload.payload;
+  // })
 );
 
 export const saveReducer = createReducer(
@@ -57,5 +69,21 @@ export const pokemonReducer = createReducer(
   pokemonInitialState,
   on(clickPokemon, (state, payload) => {
     return payload.pokemon;
+  })
+);
+
+export const paginationReducer = createReducer(
+  paginatorInitialState,
+  on(newPage, (state, { payload }) => {
+    return {
+      ...state,
+      page: payload,
+    };
+  }),
+  on(newLimit, (state, { payload }) => {
+    return {
+      ...state,
+      limit: payload,
+    };
   })
 );

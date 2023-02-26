@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { trigger, style, animate, transition } from "@angular/animations";
+import { PokemonDetailsResponse } from "src/app/types/PokemonDetailsResponse";
 
 @Component({
   selector: "poke-card",
@@ -19,7 +20,7 @@ import { trigger, style, animate, transition } from "@angular/animations";
   ],
 })
 export class PokeCardComponent {
-  @Input() pokemon: any;
+  @Input() pokemon!: PokemonDetailsResponse;
 
   constructor() {}
 }

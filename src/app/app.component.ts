@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
 import { PokemonService } from "./services/pokemon.service";
 
 @Component({
@@ -6,6 +7,10 @@ import { PokemonService } from "./services/pokemon.service";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
-  constructor(private service: PokemonService) {}
+export class AppComponent implements OnInit {
+  constructor(private store: Store, private pokemonService: PokemonService) {}
+
+  ngOnInit(): void {
+    this.store.dispatch({ type: "[Pokemon List] Load Pokemons" });
+  }
 }

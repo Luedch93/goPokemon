@@ -1,33 +1,33 @@
 .card {
-    color: black;
-    background-color: white;
-    width: 120px;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    margin: 5px 5px;
-    transition: transform .1s linear;
-    cursor: pointer;
-    img {
-        image-rendering: -moz-crisp-edges;
-        image-rendering: -o-crisp-edges;
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-        -ms-interpolation-mode: nearest-neighbor;
-    }
+  color: black;
+  background-color: white;
+  width: 120px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin: 5px 5px;
+  transition: transform 0.1s linear;
+  cursor: pointer;
+  img {
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+  }
 }
 
 .card:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .card--bar {
-    height: 5px;
-    background-color: rgb(74, 235, 157);
-    width: 55px;
-    border-radius: 5px;
-    margin-top: 5px;
+  height: 5px;
+  background-color: rgb(74, 235, 157);
+  width: 55px;
+  border-radius: 5px;
+  margin-top: 5px;
 }

@@ -1,5 +1,14 @@
 <div [@enterAnimation] class="card">
-    <img src="{{pokemon.sprites.front_default}}" alt="">
-    <h4>{{pokemon.name | titlecase}}</h4>
-    <div class="card--bar"></div>
+  <ng-container *ngIf="pokemon; else skeletonImg">
+    <img
+      [src]="pokemon.sprites.front_default"
+      alt="Pokemon front sprite"
+      loading="lazy"
+    />
+  </ng-container>
+  <ng-template #skeletonImg>
+    <app-skeleton-sprite></app-skeleton-sprite>
+  </ng-template>
+  <h4>{{ pokemon.name | titlecase }}</h4>
+  <div class="card--bar"></div>
 </div>

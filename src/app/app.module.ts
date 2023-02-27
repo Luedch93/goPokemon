@@ -4,6 +4,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule, ActionReducerMap } from "@ngrx/store";
+import { NgOptimizedImage, provideImgixLoader } from "@angular/common";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -55,6 +56,7 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<any>>(
   ],
   imports: [
     BrowserModule,
+    NgOptimizedImage,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -75,6 +77,9 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<any>>(
         pagination: paginationReducer,
       },
     },
+    provideImgixLoader(
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+    ),
   ],
   bootstrap: [AppComponent],
 })

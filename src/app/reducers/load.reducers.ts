@@ -1,13 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
 
 import {
-  loadPokemons,
   saveFilter,
   nextSave,
   previousSave,
   currentUrlSave,
   clickPokemon,
-  loadPokemonsSuccess,
+  loadPaginatedPokemonsSuccess,
   newPage,
   newLimit,
 } from "../actions/load.actions";
@@ -29,12 +28,11 @@ export const pokemonInitialState = null;
 
 export const loadReducer = createReducer(
   initialLoadState,
-  on(loadPokemons, (_, payload) => {
-    return [...payload.results];
+  on(loadPaginatedPokemonsSuccess, (_, payload) => {
+    console.log(payload.payload);
+
+    return payload.payload;
   })
-  // on(loadPokemonsSuccess, (_, payload) => {
-  //   return payload.payload;
-  // })
 );
 
 export const saveReducer = createReducer(

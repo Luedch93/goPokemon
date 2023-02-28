@@ -1,8 +1,13 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { of } from "rxjs";
-import { tap } from "rxjs/operators";
-import { PokemonListResponse } from "../types/PokemonListResponse";
+import { forkJoin, Observable, of } from "rxjs";
+import { switchMap, take, tap } from "rxjs/operators";
+import { Pagination } from "../types/Pagination";
+import { PokemonDetailsResponse } from "../types/PokemonDetailsResponse";
+import {
+  PokemonListItem,
+  PokemonListResponse,
+} from "../types/PokemonListResponse";
 
 @Injectable({
   providedIn: "root",
@@ -42,5 +47,27 @@ export class FetchService {
         );
     }
     return of(this.pokemonListResponse);
+  }
+
+  getPaginatedPokemons(pagination: Pagination) {
+    const start = (pagination.page - 1) * pagination.limit;
+    const end = start + pagination.limit;
+
+    return this.getPokemons().pipe(
+      take(1),
+      switchMap<PokemonListResponse, Observable<PokemonDetailsResponse[]>>(
+        (
+          pokemonResponse: PokemonListResponse
+        ): Observable<PokemonDetailsResponse[]> => {
+          const pokemons = pokemonResponse.results.slice(start, end);
+
+          return forkJoin(
+            pokemons.map((pokemonListItem: PokemonListItem) =>
+              this.http.get<PokemonDetailsResponse>(pokemonListItem.url)
+            )
+          ).pipe(tap(console.log));
+        }
+      )
+    );
   }
 }

@@ -7,14 +7,21 @@ import {
   reduce,
   map,
   filter,
+  tap,
 } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
-import { loadPokemons, nextSave, previousSave } from "../actions/load.actions";
+import {
+  loadPaginatedPokemons,
+  loadPokemons,
+  nextSave,
+  previousSave,
+} from "../actions/load.actions";
 import {
   PokemonListItem,
   PokemonListResponse,
 } from "../types/PokemonListResponse";
 import { PokemonDetailsResponse } from "../types/PokemonDetailsResponse";
+import { Pagination } from "../types/Pagination";
 
 @Injectable({
   providedIn: "root",
@@ -23,10 +30,16 @@ export class PokemonService {
   private apiURL!: string;
   private filter$: Observable<string>;
   private currentUrl$: Observable<string>;
+  private pagination$: Observable<Pagination>;
 
   constructor(private http: HttpClient, private store: Store<any>) {
     this.filter$ = store.pipe(select("filter"));
     this.currentUrl$ = store.pipe(select("apiURL"));
+    this.pagination$ = store.pipe<Pagination>(select("pagination"));
+
+    this.pagination$.subscribe((pagination: Pagination) =>
+      this.store.dispatch(loadPaginatedPokemons({ pagination }))
+    );
 
     this.filter$
       .pipe(

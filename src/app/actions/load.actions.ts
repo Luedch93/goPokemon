@@ -1,14 +1,20 @@
 import { createAction, props } from "@ngrx/store";
-import { PokemonListResponse } from "../types/PokemonListResponse";
+import { Pagination } from "../types/Pagination";
+import { PokemonDetailsResponse } from "../types/PokemonDetailsResponse";
 
 export const loadPokemons = createAction(
   "[List Component] Load",
   props<{ results: any[] }>()
 );
 
-export const loadPokemonsSuccess = createAction(
+export const loadPaginatedPokemons = createAction(
+  "[List Component] Load Paginated Pokemons",
+  props<{ pagination: Pagination }>()
+);
+
+export const loadPaginatedPokemonsSuccess = createAction(
   "[Pokemon List] Load Pokemons Success",
-  props<{ payload: PokemonListResponse }>()
+  props<{ payload: PokemonDetailsResponse[] }>()
 );
 
 export const saveFilter = createAction(

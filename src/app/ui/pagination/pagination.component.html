@@ -1,4 +1,12 @@
-<div id="navigation">
-    <button [disabled]="!previousUrl" (click)="goPrevious()">Previous</button>
-    <button [disabled]="!nextUrl" (click)="goNext()">Next</button>
+<div id="navigation" *ngIf="pagination">
+  <button
+    *ngIf="previousPageAvailable(); else empty"
+    (click)="handlePrevious()"
+  >
+    Previous
+  </button>
+  <ng-template #empty>
+    <button disabled>Previous</button>
+  </ng-template>
+  <button (click)="handleNext()">Next</button>
 </div>

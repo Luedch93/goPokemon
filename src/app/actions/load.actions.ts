@@ -53,6 +53,10 @@ export const newPage = createAction(
   props<{ payload: number }>()
 );
 
+export const nextPage = createAction("[Pagination] Next Page");
+
+export const previousPage = createAction("[Pagination] Previous Page");
+
 export const newLimit = createAction(
   "[Pagination] New Limit",
   props<{ payload: number }>()

@@ -3,10 +3,6 @@
     [value]="pokemonState.filter"
     (newFilter)="handleFilter($event)"
   ></search-input>
-  <ng-container *ngIf="pagination$ | async as pagination">
-    {{ pokemonState.filter }}
-    {{ pokemonState.total }}
-  </ng-container>
   <div id="card--container">
     <poke-card
       *ngFor="let pokemon of pokemonState.detailedPaginatedList"
@@ -14,17 +10,21 @@
       (click)="showDetail(pokemon)"
     ></poke-card>
   </div>
-
   <not-found-card
     *ngIf="
       !pokemonState.loading && pokemonState.detailedPaginatedList.length === 0
     "
   ></not-found-card>
-  <ng-container *ngIf="pokemonState.loading"> Loading </ng-container>
   <div
     id="footer"
     *ngIf="pokemonState && pokemonState.detailedPaginatedList.length > 0"
   >
-    <pagination></pagination>
+    <ng-container *ngIf="pagination$ | async as pagination">
+      <pagination
+        [pagination]="pagination"
+        (clickNext)="handleNext()"
+        (clickPrevious)="handlePrevious()"
+      ></pagination>
+    </ng-container>
   </div>
 </ng-container>

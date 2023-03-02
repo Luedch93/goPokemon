@@ -12,6 +12,8 @@ import {
   loadPaginatedPokemons,
   loadPokemonsSuccess,
   newFilter,
+  previousPage,
+  nextPage,
 } from "../actions/load.actions";
 import { Pagination } from "../types/Pagination";
 import { PokemonListItem } from "../types/PokemonListResponse";
@@ -111,6 +113,18 @@ export const paginationReducer = createReducer(
     return {
       ...state,
       limit: payload,
+    };
+  }),
+  on(previousPage, (state) => {
+    return {
+      ...state,
+      page: state.page - 1,
+    };
+  }),
+  on(nextPage, (state) => {
+    return {
+      ...state,
+      page: state.page + 1,
     };
   })
 );

@@ -4,7 +4,12 @@ import { Router } from "@angular/router";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
 
-import { clickPokemon, newFilter } from "../../actions/load.actions";
+import {
+  clickPokemon,
+  newFilter,
+  nextPage,
+  previousPage,
+} from "../../actions/load.actions";
 import { Pagination } from "../../types/Pagination";
 import { PokemonState } from "../../types/State";
 
@@ -26,5 +31,13 @@ export class PokemonListComponent {
 
   handleFilter(value: string) {
     this.store.dispatch(newFilter({ payload: value }));
+  }
+
+  handleNext() {
+    this.store.dispatch(nextPage());
+  }
+
+  handlePrevious() {
+    this.store.dispatch(previousPage());
   }
 }

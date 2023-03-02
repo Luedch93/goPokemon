@@ -1,24 +1,30 @@
-<search-input></search-input>
-
-<ng-container *ngIf="pagination$ | async as pagination">
-  {{ pagination | json }}
-</ng-container>
-
-<ng-container *ngIf="pokemons$ | async as pokemonResponse; else loading">
+<ng-container *ngIf="pokemons$ | async as pokemonState">
+  <search-input
+    [value]="pokemonState.filter"
+    (newFilter)="handleFilter($event)"
+  ></search-input>
+  <ng-container *ngIf="pagination$ | async as pagination">
+    {{ pokemonState.filter }}
+    {{ pokemonState.total }}
+  </ng-container>
   <div id="card--container">
     <poke-card
-      *ngFor="let pokemon of pokemonResponse"
+      *ngFor="let pokemon of pokemonState.detailedPaginatedList"
       [pokemon]="pokemon"
       (click)="showDetail(pokemon)"
     ></poke-card>
   </div>
 
   <not-found-card
-    *ngIf="pokemonResponse && pokemonResponse.length === 0"
+    *ngIf="
+      !pokemonState.loading && pokemonState.detailedPaginatedList.length === 0
+    "
   ></not-found-card>
-
-  <div id="footer" *ngIf="pokemonResponse && pokemonResponse.length > 0">
+  <ng-container *ngIf="pokemonState.loading"> Loading </ng-container>
+  <div
+    id="footer"
+    *ngIf="pokemonState && pokemonState.detailedPaginatedList.length > 0"
+  >
     <pagination></pagination>
   </div>
 </ng-container>
-<ng-template #loading> Loading </ng-template>

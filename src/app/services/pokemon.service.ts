@@ -38,38 +38,26 @@ export class PokemonService {
     this.pagination$ = store.pipe<Pagination>(select("pagination"));
 
     this.pagination$.subscribe((pagination: Pagination) =>
-      this.store.dispatch(loadPaginatedPokemons({ pagination }))
+      this.store.dispatch(loadPaginatedPokemons({ payload: pagination }))
     );
 
-    this.filter$
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        filter((value: string) => value !== ""),
-        map((res) => res.toLocaleLowerCase())
-      )
-      .subscribe((pokemon) => {
-        this.filterPokemon(pokemon).then(
-          (res) => {
-            this.store.dispatch(loadPokemons({ results: res }));
-          },
-          (err) => {
-            this.store.dispatch(loadPokemons({ results: [] }));
-          }
-        );
-      });
-
-    this.currentUrl$.subscribe((url) => {
-      this.apiURL = url;
-      this.getPokemonsDetailed().then(
-        (results) => {
-          this.store.dispatch(loadPokemons({ results }));
-        },
-        (err) => {
-          this.store.dispatch(loadPokemons({ results: [] }));
-        }
-      );
-    });
+    // this.filter$
+    //   .pipe(
+    //     debounceTime(500),
+    //     distinctUntilChanged(),
+    //     filter((value: string) => value !== ""),
+    //     map((res) => res.toLocaleLowerCase())
+    //   )
+    //   .subscribe((pokemon) => {
+    //     this.filterPokemon(pokemon).then(
+    //       (res) => {
+    //         this.store.dispatch(loadPokemons({ results: res }));
+    //       },
+    //       (err) => {
+    //         this.store.dispatch(loadPokemons({ results: [] }));
+    //       }
+    //     );
+    //   });
   }
 
   filterPokemon(name: string): Promise<any> {

@@ -8,21 +8,39 @@ import { FetchService } from "../services/fetch.service";
 import {
   loadPaginatedPokemons,
   loadPaginatedPokemonsSuccess,
+  loadPokemons,
+  loadPokemonsSuccess,
 } from "../actions/load.actions";
 import { PokemonDetailsResponse } from "../types/PokemonDetailsResponse";
+import { PokemonListResponse } from "../types/PokemonListResponse";
 
 @Injectable()
 export class PokemonsEffects {
-  loadPokemons$ = createEffect(() =>
+  loadDetailedPokemons$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadPaginatedPokemons),
-      mergeMap(({ pagination }) =>
+      mergeMap(({ payload: pagination }) =>
         this.fetchService.getPaginatedPokemons(pagination).pipe(
           map((pokemonDetailsList: PokemonDetailsResponse[]) =>
             loadPaginatedPokemonsSuccess({ payload: pokemonDetailsList })
           ),
           catchError(() => EMPTY)
         )
+      )
+    )
+  );
+
+  loadPokemonListResponse$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadPokemons),
+      mergeMap(() =>
+        this.fetchService
+          .getPokemons()
+          .pipe(
+            map((pokemonsListResponse: PokemonListResponse) =>
+              loadPokemonsSuccess({ payload: pokemonsListResponse })
+            )
+          )
       )
     )
   );

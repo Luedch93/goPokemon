@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule, InjectionToken } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { StoreModule, ActionReducerMap } from "@ngrx/store";
 import { NgOptimizedImage, provideImgixLoader } from "@angular/common";
@@ -60,6 +60,7 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<any>>(
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(REDUCER_TOKEN),
     EffectsModule.forRoot([PokemonsEffects]),

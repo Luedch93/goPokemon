@@ -9,10 +9,21 @@ import {
   loadPaginatedPokemonsSuccess,
   newPage,
   newLimit,
+  loadPaginatedPokemons,
+  loadPokemonsSuccess,
+  newFilter,
 } from "../actions/load.actions";
 import { Pagination } from "../types/Pagination";
+import { PokemonListItem } from "../types/PokemonListResponse";
+import { PokemonState } from "../types/State";
 
-export const initialLoadState: any = null;
+export const initialLoadState: PokemonState = {
+  total: 0,
+  pokemons: [],
+  detailedPaginatedList: [],
+  loading: false,
+  filter: "",
+};
 export const saveInitialState = "";
 
 export const paginatorInitialState: Pagination = {
@@ -28,11 +39,29 @@ export const pokemonInitialState = null;
 
 export const loadReducer = createReducer(
   initialLoadState,
-  on(loadPaginatedPokemonsSuccess, (_, payload) => {
-    console.log(payload.payload);
-
-    return payload.payload;
-  })
+  on(
+    loadPaginatedPokemons,
+    (state, { payload }): PokemonState => ({
+      ...state,
+      loading: true,
+    })
+  ),
+  on(loadPaginatedPokemonsSuccess, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    detailedPaginatedList: payload,
+  })),
+  on(loadPokemonsSuccess, (state, { payload }) => ({
+    ...state,
+    pokemons: payload.results.map(
+      (pokemonsListItem: PokemonListItem) => pokemonsListItem.name
+    ),
+    total: payload.count,
+  })),
+  on(newFilter, (state, { payload }) => ({
+    ...state,
+    filter: payload,
+  }))
 );
 
 export const saveReducer = createReducer(

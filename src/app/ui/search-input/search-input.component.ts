@@ -1,7 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { Store, select } from "@ngrx/store";
-import { saveFilter } from "src/app/actions/load.actions";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Observable } from "rxjs";
+import { FormControl } from "@angular/forms";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  tap,
+} from "rxjs/operators";
 
 @Component({
   selector: "search-input",
@@ -9,24 +15,31 @@ import { Observable } from "rxjs";
   styleUrls: ["./search-input.component.scss"],
 })
 export class SearchInputComponent implements OnInit {
-  public value = "";
+  @Input() value = "";
+  @Output() newFilter = new EventEmitter<string>();
+  public filterField!: FormControl;
   filter$!: Observable<string>;
-
-  constructor(private store: Store<any>) {}
+  constructor() {}
 
   ngOnInit() {
-    this.filter$ = this.store.pipe(select("filter"));
-    this.filter$.subscribe((filter) => {
-      this.value = filter;
+    this.filterField = new FormControl<string>(this.value, {
+      nonNullable: true,
     });
-  }
 
-  keyUp(event: any) {
-    this.store.dispatch(saveFilter({ text: event }));
+    this.filterField.valueChanges
+      .pipe(
+        filter((value) => value !== ""),
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap(console.log),
+        map((value) => value.toLocaleLowerCase())
+      )
+      .subscribe((value: string) => {
+        this.newFilter.emit(value);
+      });
   }
 
   cleanFilter() {
-    this.value = "";
-    this.store.dispatch(saveFilter({ text: "" }));
+    this.filterField.setValue("");
   }
 }

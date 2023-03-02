@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { select, Store } from "@ngrx/store";
 import { forkJoin, Observable, of } from "rxjs";
 import { switchMap, take, tap } from "rxjs/operators";
 import { Pagination } from "../types/Pagination";
@@ -8,6 +9,7 @@ import {
   PokemonListItem,
   PokemonListResponse,
 } from "../types/PokemonListResponse";
+import { State } from "../types/State";
 
 @Injectable({
   providedIn: "root",
@@ -16,7 +18,7 @@ export class FetchService {
   private readonly API_URL = "https://pokeapi.co/api/v2";
   private pokemonListResponse?: PokemonListResponse;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private store: Store<State>) {
     const cachedResponse = localStorage.getItem("PokemonListResponse");
     if (cachedResponse) {
       this.pokemonListResponse = JSON.parse(cachedResponse);
@@ -67,6 +69,33 @@ export class FetchService {
             )
           ).pipe(tap(console.log));
         }
+      )
+    );
+  }
+
+  searchPokemons(name: string) {
+    return this.getPokemons().pipe(
+      switchMap((pokemonListResponse: PokemonListResponse) => {
+        const founded = pokemonListResponse.results
+          .filter((pokemonItem: PokemonListItem) =>
+            pokemonItem.name.includes(name)
+          )
+          .slice(0, 10);
+        return forkJoin(
+          founded.map((pokemonListItem: PokemonListItem) =>
+            this.http.get<PokemonDetailsResponse>(pokemonListItem.url)
+          )
+        );
+      })
+    );
+  }
+
+  getLatestsPaginationValues() {
+    return this.store.pipe(
+      select("pagination"),
+      take(1),
+      switchMap<Pagination, Observable<PokemonDetailsResponse[]>>(
+        (pagination) => this.getPaginatedPokemons(pagination)
       )
     );
   }

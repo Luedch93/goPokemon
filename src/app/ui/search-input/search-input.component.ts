@@ -28,7 +28,6 @@ export class SearchInputComponent implements OnInit {
 
     this.filterField.valueChanges
       .pipe(
-        filter((value) => value !== ""),
         debounceTime(500),
         distinctUntilChanged(),
         tap(console.log),

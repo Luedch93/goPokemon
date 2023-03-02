@@ -1,3 +1,4 @@
+import { Pagination } from "./Pagination";
 import { PokemonDetailsResponse } from "./PokemonDetailsResponse";
 
 export type PokemonState = {
@@ -7,3 +8,8 @@ export type PokemonState = {
   loading: boolean;
   filter: string;
 };
+
+export interface State {
+  pagination: Pagination;
+  pokemons: PokemonState;
+}

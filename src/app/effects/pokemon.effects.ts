@@ -10,6 +10,7 @@ import {
   loadPaginatedPokemonsSuccess,
   loadPokemons,
   loadPokemonsSuccess,
+  newFilter,
 } from "../actions/load.actions";
 import { PokemonDetailsResponse } from "../types/PokemonDetailsResponse";
 import { PokemonListResponse } from "../types/PokemonListResponse";
@@ -42,6 +43,31 @@ export class PokemonsEffects {
             )
           )
       )
+    )
+  );
+
+  searchPokemons$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(newFilter),
+      mergeMap(({ payload: name }) => {
+        if (name === "") {
+          return this.fetchService
+            .getLatestsPaginationValues()
+            .pipe(
+              map((pokemonDetailsList: PokemonDetailsResponse[]) =>
+                loadPaginatedPokemonsSuccess({ payload: pokemonDetailsList })
+              )
+            );
+        } else {
+          return this.fetchService
+            .searchPokemons(name)
+            .pipe(
+              map((pokemonDetailsList: PokemonDetailsResponse[]) =>
+                loadPaginatedPokemonsSuccess({ payload: pokemonDetailsList })
+              )
+            );
+        }
+      })
     )
   );
 

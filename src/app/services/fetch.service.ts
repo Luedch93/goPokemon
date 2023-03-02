@@ -81,6 +81,9 @@ export class FetchService {
             pokemonItem.name.includes(name)
           )
           .slice(0, 10);
+        if (founded.length === 0) {
+          return of([]);
+        }
         return forkJoin(
           founded.map((pokemonListItem: PokemonListItem) =>
             this.http.get<PokemonDetailsResponse>(pokemonListItem.url)

@@ -40,24 +40,6 @@ export class PokemonService {
     this.pagination$.subscribe((pagination: Pagination) =>
       this.store.dispatch(loadPaginatedPokemons({ payload: pagination }))
     );
-
-    // this.filter$
-    //   .pipe(
-    //     debounceTime(500),
-    //     distinctUntilChanged(),
-    //     filter((value: string) => value !== ""),
-    //     map((res) => res.toLocaleLowerCase())
-    //   )
-    //   .subscribe((pokemon) => {
-    //     this.filterPokemon(pokemon).then(
-    //       (res) => {
-    //         this.store.dispatch(loadPokemons({ results: res }));
-    //       },
-    //       (err) => {
-    //         this.store.dispatch(loadPokemons({ results: [] }));
-    //       }
-    //     );
-    //   });
   }
 
   filterPokemon(name: string): Promise<any> {

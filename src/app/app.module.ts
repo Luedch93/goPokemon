@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgOptimizedImage, provideImgixLoader } from "@angular/common";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -22,6 +21,7 @@ import { StatChartComponent } from "./ui/stat-chart/stat-chart.component";
 import { SkeletonSpriteComponent } from "./ui/skeleton-sprite/skeleton-sprite.component";
 
 import { NgrxModule } from "./ngrx.module";
+import { ImageOptimizationModule } from "./image-optimization.module";
 
 @NgModule({
   declarations: [
@@ -42,18 +42,14 @@ import { NgrxModule } from "./ngrx.module";
   ],
   imports: [
     BrowserModule,
-    NgOptimizedImage,
+
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgrxModule,
-  ],
-  providers: [
-    provideImgixLoader(
-      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
-    ),
+    ImageOptimizationModule,
   ],
   bootstrap: [AppComponent],
 })

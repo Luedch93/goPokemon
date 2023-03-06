@@ -18,6 +18,7 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<any>>(
 );
 
 @NgModule({
+  exports: [StoreModule, EffectsModule],
   imports: [
     StoreModule.forRoot(REDUCER_TOKEN),
     EffectsModule.forRoot([PokemonsEffects]),

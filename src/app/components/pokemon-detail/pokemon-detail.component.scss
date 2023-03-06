@@ -3,26 +3,46 @@
   width: 300px;
 }
 
-@media (min-width: 425px) {
-    #detail {
-        width: 390px;
+.detail {
+  &-link {
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    color: black;
+    &:link {
+      color: black;
     }
+    &:hover {
+      color: black;
+    }
+    &:active {
+      color: black;
+    }
+  }
+}
+
+@media (min-width: 425px) {
+  #detail {
+    width: 390px;
+  }
 }
 
 @media (min-width: 1024px) {
-    #detail {
-        width: 520px;
-    }
+  #detail {
+    width: 520px;
+  }
 }
 
 @media (min-width: 1440px) {
-    #detail {
-        width: 650px;
-    }
+  #detail {
+    width: 650px;
+  }
 }
 
 @media (min-width: 2560px) {
-    #detail {
-        width: 1300px;
-    }
+  #detail {
+    width: 1300px;
+  }
 }

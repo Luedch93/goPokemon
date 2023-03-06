@@ -11,8 +11,6 @@ export class PaginationComponent {
   @Output() clickNext = new EventEmitter<void>();
   @Output() clickPrevious = new EventEmitter<void>();
 
-  constructor() {}
-
   handleNext() {
     this.clickNext.emit();
   }

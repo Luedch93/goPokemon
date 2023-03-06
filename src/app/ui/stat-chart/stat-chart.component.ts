@@ -7,6 +7,4 @@ import { Component, Input } from "@angular/core";
 })
 export class StatChartComponent {
   @Input() stats!: any[];
-
-  constructor() {}
 }

@@ -10,8 +10,6 @@ export class StatBarComponent implements OnInit {
   maxStat = 267;
   content = "5%";
 
-  constructor() {}
-
   ngOnInit() {
     const timer = setInterval(() => {
       this.content = this.calcPercentage(Math.floor(Math.random() * 267));

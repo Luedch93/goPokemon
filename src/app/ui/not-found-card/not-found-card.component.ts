@@ -18,6 +18,4 @@ import { trigger, style, animate, transition } from "@angular/animations";
     ]),
   ],
 })
-export class NotFoundCardComponent {
-  constructor() {}
-}
+export class NotFoundCardComponent {}

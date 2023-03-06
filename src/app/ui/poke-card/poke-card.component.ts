@@ -21,6 +21,4 @@ import { PokemonDetailsResponse } from "src/app/types/PokemonDetailsResponse";
 })
 export class PokeCardComponent {
   @Input() pokemon!: PokemonDetailsResponse;
-
-  constructor() {}
 }

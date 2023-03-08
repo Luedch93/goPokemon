@@ -2,5 +2,5 @@
   <detail-card *ngIf="pokemon" [pokemon]="pokemon">
     <a class="detail-link" routerLink="/">Go back</a>
   </detail-card>
-  <not-found-card *ngIf="!pokemon"></not-found-card>
+  <not-found-card *ngIf="!loading && !pokemon"></not-found-card>
 </div>

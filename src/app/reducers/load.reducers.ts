@@ -1,10 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 
 import {
-  saveFilter,
-  nextSave,
-  previousSave,
-  currentUrlSave,
   clickPokemon,
   loadPaginatedPokemonsSuccess,
   newPage,
@@ -25,6 +21,7 @@ export const initialLoadState: PokemonState = {
   detailedPaginatedList: [],
   loading: false,
   filter: "",
+  selectedPokemon: undefined,
 };
 export const saveInitialState = "";
 
@@ -37,13 +34,11 @@ export const previousState = "";
 export const nextState = "";
 export const currentUrlState = "https://pokeapi.co/api/v2/pokemon";
 
-export const pokemonInitialState = null;
-
 export const loadReducer = createReducer(
   initialLoadState,
   on(
     loadPaginatedPokemons,
-    (state, { payload }): PokemonState => ({
+    (state): PokemonState => ({
       ...state,
       loading: true,
     })
@@ -63,42 +58,11 @@ export const loadReducer = createReducer(
   on(newFilter, (state, { payload }) => ({
     ...state,
     filter: payload,
+  })),
+  on(clickPokemon, (state, { payload }) => ({
+    ...state,
+    selectedPokemon: payload,
   }))
-);
-
-export const saveReducer = createReducer(
-  saveInitialState,
-  on(saveFilter, (_: any, payload: any) => {
-    return payload.text;
-  })
-);
-
-export const previousReducer = createReducer(
-  previousState,
-  on(previousSave, (state, payload) => {
-    return payload.previous;
-  })
-);
-
-export const nextReducer = createReducer(
-  nextState,
-  on(nextSave, (state, payload) => {
-    return payload.next;
-  })
-);
-
-export const currentUrlReducer = createReducer(
-  currentUrlState,
-  on(currentUrlSave, (state, payload) => {
-    return payload.url;
-  })
-);
-
-export const pokemonReducer = createReducer(
-  pokemonInitialState,
-  on(clickPokemon, (state, payload) => {
-    return payload.pokemon;
-  })
 );
 
 export const paginationReducer = createReducer(

@@ -7,6 +7,7 @@ export type PokemonState = {
   detailedPaginatedList: PokemonDetailsResponse[];
   loading: boolean;
   filter: string;
+  selectedPokemon?: PokemonDetailsResponse;
 };
 
 export interface State {

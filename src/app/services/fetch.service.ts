@@ -67,7 +67,7 @@ export class FetchService {
             pokemons.map((pokemonListItem: PokemonListItem) =>
               this.http.get<PokemonDetailsResponse>(pokemonListItem.url)
             )
-          ).pipe(tap(console.log));
+          );
         }
       )
     );

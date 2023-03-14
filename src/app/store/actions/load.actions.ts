@@ -1,7 +1,7 @@
 import { createAction, props } from "@ngrx/store";
-import { Pagination } from "../types/Pagination";
-import { PokemonDetailsResponse } from "../types/PokemonDetailsResponse";
-import { PokemonListResponse } from "../types/PokemonListResponse";
+import { Pagination } from "../../types/Pagination";
+import { PokemonDetailsResponse } from "../../types/PokemonDetailsResponse";
+import { PokemonListResponse } from "../../types/PokemonListResponse";
 
 export const loadPokemons = createAction("Load All Pokemons");
 

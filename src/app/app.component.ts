@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { Store } from "@ngrx/store";
 
-import { loadPokemons } from "./actions/load.actions";
+import { loadPokemons } from "./store/actions/load.actions";
 import { PokemonService } from "./services/pokemon.service";
 
 @Component({

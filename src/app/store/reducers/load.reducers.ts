@@ -11,9 +11,9 @@ import {
   previousPage,
   nextPage,
 } from "../actions/load.actions";
-import { Pagination } from "../types/Pagination";
-import { PokemonListItem } from "../types/PokemonListResponse";
-import { PokemonState } from "../types/State";
+import { Pagination } from "../../types/Pagination";
+import { PokemonListItem } from "../../types/PokemonListResponse";
+import { PokemonState } from "../../types/State";
 
 export const initialLoadState: PokemonState = {
   total: 0,

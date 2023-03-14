@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Store, select } from "@ngrx/store";
-import { loadPaginatedPokemons } from "../actions/load.actions";
+import { loadPaginatedPokemons } from "../store/actions/load.actions";
 import { Pagination } from "../types/Pagination";
 import { State } from "../types/State";
 

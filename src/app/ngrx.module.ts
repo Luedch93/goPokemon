@@ -2,8 +2,8 @@ import { InjectionToken, NgModule } from "@angular/core";
 import { EffectsModule } from "@ngrx/effects";
 import { ActionReducerMap, StoreModule } from "@ngrx/store";
 
-import { PokemonsEffects } from "./effects/pokemon.effects";
-import { loadReducer, paginationReducer } from "./reducers/load.reducers";
+import { PokemonsEffects } from "./store/effects/pokemon.effects";
+import { loadReducer, paginationReducer } from "./store/reducers/load.reducers";
 
 export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<any>>(
   "root reducer"

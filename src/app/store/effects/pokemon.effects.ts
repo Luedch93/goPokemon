@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
 
-import { FetchService } from "../services/fetch.service";
+import { FetchService } from "../../services/fetch.service";
 import {
   loadPaginatedPokemons,
   loadPaginatedPokemonsSuccess,
@@ -12,8 +12,8 @@ import {
   loadPokemonsSuccess,
   newFilter,
 } from "../actions/load.actions";
-import { PokemonDetailsResponse } from "../types/PokemonDetailsResponse";
-import { PokemonListResponse } from "../types/PokemonListResponse";
+import { PokemonDetailsResponse } from "../../types/PokemonDetailsResponse";
+import { PokemonListResponse } from "../../types/PokemonListResponse";
 
 @Injectable()
 export class PokemonsEffects {

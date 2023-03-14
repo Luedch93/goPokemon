@@ -6,37 +6,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { PokeCardComponent } from "./ui/poke-card/poke-card.component";
-import { SquareAnimationComponent } from "./ui/square-animation/square-animation.component";
-import { SearchInputComponent } from "./ui/search-input/search-input.component";
-import { PaginationComponent } from "./ui/pagination/pagination.component";
-import { NotFoundCardComponent } from "./ui/not-found-card/not-found-card.component";
-import { DetailCardComponent } from "./ui/detail-card/detail-card.component";
-import { TypeSlotComponent } from "./ui/type-slot/type-slot.component";
-import { WeightHeightPipe } from "./pipes/weight-height.pipe";
-import { StatBarComponent } from "./ui/stat-bar/stat-bar.component";
-import { StatChartComponent } from "./ui/stat-chart/stat-chart.component";
-import { SkeletonSpriteComponent } from "./ui/skeleton-sprite/skeleton-sprite.component";
 
 import { NgrxModule } from "./ngrx.module";
-import { ImageOptimizationModule } from "./image-optimization.module";
 import { PokemonModule } from "./pokemons/pokemons.module";
+import { UiModule } from "./ui/ui.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PokeCardComponent,
-    SquareAnimationComponent,
-    SearchInputComponent,
-    PaginationComponent,
-    NotFoundCardComponent,
-    DetailCardComponent,
-    TypeSlotComponent,
-    WeightHeightPipe,
-    StatBarComponent,
-    StatChartComponent,
-    SkeletonSpriteComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,7 +21,7 @@ import { PokemonModule } from "./pokemons/pokemons.module";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgrxModule,
-    ImageOptimizationModule,
+    UiModule,
     PokemonModule,
   ],
   bootstrap: [AppComponent],

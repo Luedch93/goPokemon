@@ -5,9 +5,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { finalize, take } from "rxjs/operators";
 
-import { PokemonState, State } from "../../../types/State";
-import { PokemonDetailsResponse } from "../../../types/PokemonDetailsResponse";
-import { FetchService } from "../../../services/fetch.service";
+import { PokemonState, State } from "../../types/State";
+import { PokemonDetailsResponse } from "../../types/PokemonDetailsResponse";
+import { FetchService } from "../../services/fetch.service";
 
 @Component({
   selector: "app-pokemon-detail",

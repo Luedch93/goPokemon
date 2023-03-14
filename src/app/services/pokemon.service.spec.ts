@@ -10,7 +10,7 @@ import {
   nextReducer,
   currentUrlReducer,
   pokemonReducer,
-} from "../reducers/load.reducers";
+} from "../store/reducers/load.reducers";
 
 describe("PokemonService", () => {
   let service: PokemonService;

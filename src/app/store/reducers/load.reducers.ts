@@ -22,6 +22,7 @@ export const initialLoadState: PokemonState = {
   loading: false,
   filter: "",
   selectedPokemon: undefined,
+  showPagination: true,
 };
 export const saveInitialState = "";
 
@@ -58,6 +59,7 @@ export const loadReducer = createReducer(
   on(newFilter, (state, { payload }) => ({
     ...state,
     filter: payload,
+    showPagination: payload ? false : true,
   })),
   on(clickPokemon, (state, { payload }) => ({
     ...state,

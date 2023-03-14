@@ -8,6 +8,7 @@ export type PokemonState = {
   loading: boolean;
   filter: string;
   selectedPokemon?: PokemonDetailsResponse;
+  showPagination: boolean;
 };
 
 export interface State {

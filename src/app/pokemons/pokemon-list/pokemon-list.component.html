@@ -21,6 +21,7 @@
   >
     <ng-container *ngIf="pagination$ | async as pagination">
       <pagination
+        *ngIf="pokemonState.showPagination"
         [pagination]="pagination"
         (clickNext)="handleNext()"
         (clickPrevious)="handlePrevious()"

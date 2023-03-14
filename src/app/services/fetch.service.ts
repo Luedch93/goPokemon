@@ -80,7 +80,7 @@ export class FetchService {
           .filter((pokemonItem: PokemonListItem) =>
             pokemonItem.name.includes(name)
           )
-          .slice(0, 10);
+          .slice(0, 20);
         if (founded.length === 0) {
           return of([]);
         }

@@ -102,4 +102,10 @@ export class FetchService {
       )
     );
   }
+
+  getPokemonDetailsByName(name: string) {
+    return this.http.get<PokemonDetailsResponse>(
+      `https://pokeapi.co/api/v2/pokemon/${name}`
+    );
+  }
 }

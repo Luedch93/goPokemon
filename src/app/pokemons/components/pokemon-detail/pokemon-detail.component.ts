@@ -1,9 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
-import { Observable } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 
-import { PokemonService } from "../../../services/pokemon.service";
+import { Observable } from "rxjs";
+import { finalize, take } from "rxjs/operators";
+
+import { PokemonState, State } from "../../../types/State";
+import { PokemonDetailsResponse } from "../../../types/PokemonDetailsResponse";
+import { FetchService } from "../../../services/fetch.service";
 
 @Component({
   selector: "app-pokemon-detail",
@@ -11,31 +15,38 @@ import { PokemonService } from "../../../services/pokemon.service";
   styleUrls: ["./pokemon-detail.component.scss"],
 })
 export class PokemonDetailComponent implements OnInit {
-  pokemon$!: Observable<any>;
-  pokemon: any;
+  pokemons$!: Observable<PokemonState>;
+  pokemon?: PokemonDetailsResponse;
   pokemonName!: string;
+  loading = true;
 
   constructor(
-    private store: Store<any>,
-    private service: PokemonService,
+    private store: Store<State>,
+    private service: FetchService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.pokemon$ = this.store.pipe(select("pokemon"));
+    this.pokemons$ = this.store.pipe(select("pokemons"));
     this.pokemonName = this.route.snapshot.paramMap.get("name") ?? "";
 
-    this.pokemon$.subscribe((res) => {
-      this.pokemon = res;
-      if (this.pokemon == null) {
-        this.service.getPokemonDetail(this.pokemonName).then(
-          (pokemon) => {
-            this.pokemon = pokemon[0];
-          },
-          (err) => {
-            console.error(err);
-          }
-        );
+    this.pokemons$.subscribe((res) => {
+      this.pokemon = res.selectedPokemon;
+      if (!this.pokemon) {
+        this.service
+          .getPokemonDetailsByName(this.pokemonName)
+          .pipe(
+            take(1),
+            finalize(() => (this.loading = false))
+          )
+          .subscribe(
+            (pokemon) => {
+              this.pokemon = pokemon;
+            },
+            (err) => {
+              console.error(err);
+            }
+          );
       }
     });
   }

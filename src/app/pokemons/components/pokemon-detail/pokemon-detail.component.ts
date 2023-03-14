@@ -3,7 +3,7 @@ import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 
-import { PokemonService } from "../../services/pokemon.service";
+import { PokemonService } from "../../../services/pokemon.service";
 
 @Component({
   selector: "app-pokemon-detail",

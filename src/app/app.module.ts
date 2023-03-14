@@ -10,9 +10,7 @@ import { PokeCardComponent } from "./ui/poke-card/poke-card.component";
 import { SquareAnimationComponent } from "./ui/square-animation/square-animation.component";
 import { SearchInputComponent } from "./ui/search-input/search-input.component";
 import { PaginationComponent } from "./ui/pagination/pagination.component";
-import { PokemonListComponent } from "./components/pokemon-list/pokemon-list.component";
 import { NotFoundCardComponent } from "./ui/not-found-card/not-found-card.component";
-import { PokemonDetailComponent } from "./components/pokemon-detail/pokemon-detail.component";
 import { DetailCardComponent } from "./ui/detail-card/detail-card.component";
 import { TypeSlotComponent } from "./ui/type-slot/type-slot.component";
 import { WeightHeightPipe } from "./pipes/weight-height.pipe";
@@ -22,6 +20,7 @@ import { SkeletonSpriteComponent } from "./ui/skeleton-sprite/skeleton-sprite.co
 
 import { NgrxModule } from "./ngrx.module";
 import { ImageOptimizationModule } from "./image-optimization.module";
+import { PokemonModule } from "./pokemons/pokemons.module";
 
 @NgModule({
   declarations: [
@@ -30,9 +29,7 @@ import { ImageOptimizationModule } from "./image-optimization.module";
     SquareAnimationComponent,
     SearchInputComponent,
     PaginationComponent,
-    PokemonListComponent,
     NotFoundCardComponent,
-    PokemonDetailComponent,
     DetailCardComponent,
     TypeSlotComponent,
     WeightHeightPipe,
@@ -42,7 +39,6 @@ import { ImageOptimizationModule } from "./image-optimization.module";
   ],
   imports: [
     BrowserModule,
-
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -50,6 +46,7 @@ import { ImageOptimizationModule } from "./image-optimization.module";
     BrowserAnimationsModule,
     NgrxModule,
     ImageOptimizationModule,
+    PokemonModule,
   ],
   bootstrap: [AppComponent],
 })

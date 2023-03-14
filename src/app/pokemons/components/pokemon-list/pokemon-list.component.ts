@@ -9,9 +9,9 @@ import {
   newFilter,
   nextPage,
   previousPage,
-} from "../../actions/load.actions";
-import { Pagination } from "../../types/Pagination";
-import { PokemonState } from "../../types/State";
+} from "../../../actions/load.actions";
+import { Pagination } from "../../../types/Pagination";
+import { PokemonState } from "../../../types/State";
 
 @Component({
   selector: "app-pokemon-list",

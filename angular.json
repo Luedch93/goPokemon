@@ -72,10 +72,10 @@
           "options": {},
           "configurations": {
             "production": {
-              "browserTarget": "goPokemon:build:production"
+              "buildTarget": "goPokemon:build:production"
             },
             "development": {
-              "browserTarget": "goPokemon:build:development"
+              "buildTarget": "goPokemon:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "goPokemon:build"
+            "buildTarget": "goPokemon:build"
           }
         },
         "test": {

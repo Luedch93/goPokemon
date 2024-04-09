@@ -1,6 +1,9 @@
 <div id="detail">
-  <detail-card *ngIf="pokemon" [pokemon]="pokemon">
+  @if (pokemon) {
+  <detail-card [pokemon]="pokemon">
     <a class="detail-link" routerLink="/">Go back</a>
   </detail-card>
-  <not-found-card *ngIf="!loading && !pokemon"></not-found-card>
+  } @if (!loading && !pokemon) {
+  <not-found-card></not-found-card>
+  }
 </div>

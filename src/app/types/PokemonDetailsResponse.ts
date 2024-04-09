@@ -33,9 +33,9 @@ export type Stat = {
 };
 
 export type Type = {
-  slot: 1;
+  slot: number;
   type: {
-    name: "fairy";
-    url: "https://pokeapi.co/api/v2/type/18/";
+    name: string;
+    url: string;
   };
 };

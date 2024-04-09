@@ -1,16 +1,15 @@
 <div [@enterAnimation] class="card">
-  <ng-container *ngIf="pokemon; else skeletonImg">
-    <img
-      [ngSrc]="pokemon.id + '.png'"
-      width="96"
-      height="96"
-      alt="Pokemon front sprite"
-      priority
-    />
-  </ng-container>
-  <ng-template #skeletonImg>
-    <app-skeleton-sprite></app-skeleton-sprite>
-  </ng-template>
+  @if (pokemon) {
+  <img
+    [ngSrc]="pokemon.id + '.png'"
+    width="96"
+    height="96"
+    alt="Pokemon front sprite"
+    priority
+  />
+  } @else {
+  <app-skeleton-sprite></app-skeleton-sprite>
+  }
   <h4>{{ pokemon.name | titlecase }}</h4>
   <div class="card--bar"></div>
 </div>

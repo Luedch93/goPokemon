@@ -4,5 +4,7 @@
     placeholder="Enter the name of a pokemon"
     [formControl]="filterField"
   />
-  <div id="closeBtn" *ngIf="value.length > 0" (click)="cleanFilter()">x</div>
+  @if (value.length > 0) {
+  <div id="closeBtn" (click)="cleanFilter()">x</div>
+  }
 </div>

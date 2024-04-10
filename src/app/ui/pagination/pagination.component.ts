@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Pagination } from "src/app/types/Pagination";
 
 @Component({
   selector: "pagination",
   templateUrl: "./pagination.component.html",
   styleUrls: ["./pagination.component.scss"],
+  standalone: true,
 })
 export class PaginationComponent {
   @Input() pagination!: Pagination;

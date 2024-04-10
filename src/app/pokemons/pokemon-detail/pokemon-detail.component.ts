@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Store, select } from "@ngrx/store";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 
 import { Observable } from "rxjs";
 import { finalize, take } from "rxjs/operators";
@@ -8,11 +8,14 @@ import { finalize, take } from "rxjs/operators";
 import { PokemonState, State } from "../../types/State";
 import { PokemonDetailsResponse } from "../../types/PokemonDetailsResponse";
 import { FetchService } from "../../services/fetch.service";
+import { DetailCardComponent } from "src/app/ui/detail-card/detail-card.component";
 
 @Component({
   selector: "app-pokemon-detail",
   templateUrl: "./pokemon-detail.component.html",
   styleUrls: ["./pokemon-detail.component.scss"],
+  imports: [DetailCardComponent, RouterLink],
+  standalone: true,
 })
 export class PokemonDetailComponent implements OnInit {
   pokemons$!: Observable<PokemonState>;

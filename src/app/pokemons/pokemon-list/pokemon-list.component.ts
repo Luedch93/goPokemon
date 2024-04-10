@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { AsyncPipe } from "@angular/common";
 
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
@@ -13,11 +14,23 @@ import {
 import { Pagination } from "../../types/Pagination";
 import { PokemonState, State } from "../../types/State";
 import { PokemonDetailsResponse } from "../../types/PokemonDetailsResponse";
+import { SearchInputComponent } from "src/app/ui/search-input/search-input.component";
+import { PokeCardComponent } from "src/app/ui/poke-card/poke-card.component";
+import { PaginationComponent } from "src/app/ui/pagination/pagination.component";
+import { NotFoundCardComponent } from "src/app/ui/not-found-card/not-found-card.component";
 
 @Component({
   selector: "app-pokemon-list",
   templateUrl: "./pokemon-list.component.html",
   styleUrls: ["./pokemon-list.component.scss"],
+  imports: [
+    AsyncPipe,
+    SearchInputComponent,
+    PokeCardComponent,
+    PaginationComponent,
+    NotFoundCardComponent,
+  ],
+  standalone: true,
 })
 export class PokemonListComponent {
   pokemons$: Observable<PokemonState> = this.store.pipe(select("pokemons"));

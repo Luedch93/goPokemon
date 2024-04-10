@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Observable } from "rxjs";
-import { FormControl } from "@angular/forms";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 
 @Component({
   selector: "search-input",
   templateUrl: "./search-input.component.html",
   styleUrls: ["./search-input.component.scss"],
+  imports: [ReactiveFormsModule],
+  standalone: true,
 })
 export class SearchInputComponent implements OnInit {
   @Input() value = "";

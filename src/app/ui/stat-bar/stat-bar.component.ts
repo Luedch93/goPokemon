@@ -1,9 +1,12 @@
+import { NgStyle } from "@angular/common";
 import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
   selector: "stat-bar",
   templateUrl: "./stat-bar.component.html",
   styleUrls: ["./stat-bar.component.scss"],
+  imports: [NgStyle],
+  standalone: true,
 })
 export class StatBarComponent implements OnInit {
   @Input() stat!: number;

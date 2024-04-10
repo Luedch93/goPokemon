@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { trigger, style, animate, transition } from "@angular/animations";
+import { NgOptimizedImage } from "@angular/common";
 
 @Component({
   selector: "not-found-card",
@@ -17,5 +18,7 @@ import { trigger, style, animate, transition } from "@angular/animations";
       ]),
     ]),
   ],
+  imports: [NgOptimizedImage],
+  standalone: true,
 })
 export class NotFoundCardComponent {}

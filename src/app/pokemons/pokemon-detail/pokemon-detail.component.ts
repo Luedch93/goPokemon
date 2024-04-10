@@ -9,12 +9,13 @@ import { PokemonState, State } from "../../types/State";
 import { PokemonDetailsResponse } from "../../types/PokemonDetailsResponse";
 import { FetchService } from "../../services/fetch.service";
 import { DetailCardComponent } from "src/app/ui/detail-card/detail-card.component";
+import { NotFoundCardComponent } from "src/app/ui/not-found-card/not-found-card.component";
 
 @Component({
   selector: "app-pokemon-detail",
   templateUrl: "./pokemon-detail.component.html",
   styleUrls: ["./pokemon-detail.component.scss"],
-  imports: [DetailCardComponent, RouterLink],
+  imports: [RouterLink, DetailCardComponent, NotFoundCardComponent],
   standalone: true,
 })
 export class PokemonDetailComponent implements OnInit {

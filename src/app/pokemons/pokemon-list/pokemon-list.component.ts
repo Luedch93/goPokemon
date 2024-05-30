@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { AsyncPipe } from "@angular/common";
 
-import { Store, select } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
 import {
@@ -18,6 +18,8 @@ import { SearchInputComponent } from "src/app/ui/search-input/search-input.compo
 import { PokeCardComponent } from "src/app/ui/poke-card/poke-card.component";
 import { PaginationComponent } from "src/app/ui/pagination/pagination.component";
 import { NotFoundCardComponent } from "src/app/ui/not-found-card/not-found-card.component";
+import { selectPokemonsState } from "src/app/store/selectors/pokemons.selectors";
+import { selectPaginationState } from "src/app/store/selectors/pagination.selectors";
 
 @Component({
   selector: "app-pokemon-list",
@@ -33,8 +35,10 @@ import { NotFoundCardComponent } from "src/app/ui/not-found-card/not-found-card.
   standalone: true,
 })
 export class PokemonListComponent {
-  pokemons$: Observable<PokemonState> = this.store.pipe(select("pokemons"));
-  pagination$: Observable<Pagination> = this.store.pipe(select("pagination"));
+  pokemons$: Observable<PokemonState> = this.store.select(selectPokemonsState);
+  pagination$: Observable<Pagination> = this.store.select(
+    selectPaginationState
+  );
 
   constructor(private store: Store<State>, private router: Router) {}
 

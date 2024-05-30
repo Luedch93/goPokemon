@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { trigger, style, animate, transition } from "@angular/animations";
 import { PokemonDetailsResponse } from "src/app/types/PokemonDetailsResponse";
 import { NgOptimizedImage, TitleCasePipe } from "@angular/common";
+import { SkeletonSquareComponent } from "../skeletons/skeleton-square/skeleton-square.component";
 
 @Component({
   selector: "poke-card",
@@ -19,9 +20,10 @@ import { NgOptimizedImage, TitleCasePipe } from "@angular/common";
       ]),
     ]),
   ],
-  imports: [TitleCasePipe, NgOptimizedImage],
+  imports: [TitleCasePipe, NgOptimizedImage, SkeletonSquareComponent],
   standalone: true,
 })
 export class PokeCardComponent {
   @Input() pokemon!: PokemonDetailsResponse;
+  @Input() loading!: boolean;
 }

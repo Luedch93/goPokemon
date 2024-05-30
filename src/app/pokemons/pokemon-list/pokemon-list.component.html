@@ -5,7 +5,11 @@
 ></search-input>
 <div id="card--container">
   @for (pokemon of pokemonState.detailedPaginatedList; track pokemon.id) {
-  <poke-card [pokemon]="pokemon" (click)="showDetail(pokemon)"></poke-card>
+  <poke-card
+    [pokemon]="pokemon"
+    [loading]="pokemonState.loading"
+    (click)="showDetail(pokemon)"
+  ></poke-card>
   }
 </div>
 @if (!pokemonState.loading && pokemonState.detailedPaginatedList.length === 0) {

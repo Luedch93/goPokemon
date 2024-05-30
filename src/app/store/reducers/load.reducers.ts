@@ -19,7 +19,7 @@ export const initialLoadState: PokemonState = {
   total: 0,
   pokemons: [],
   detailedPaginatedList: [],
-  loading: false,
+  loading: true,
   filter: "",
   selectedPokemon: undefined,
   showPagination: true,

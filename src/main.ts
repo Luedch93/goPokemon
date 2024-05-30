@@ -15,9 +15,6 @@ import { PokemonsEffects } from "./app/store/effects/pokemon.effects";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideImgixLoader } from "@angular/common";
 
-// if (environment.production) {
-//   enableProdMode();
-// }
 const POKEMON_SPRITES_URL =
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 

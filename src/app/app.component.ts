@@ -1,11 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 
-import { loadPokemons } from "./store/actions/load.actions";
-import { PokemonService } from "./services/pokemon.service";
+import { Observable } from "rxjs";
+
+import {
+  loadPaginatedPokemons,
+  loadPokemons,
+} from "./store/actions/load.actions";
 import { SquareAnimationComponent } from "./ui/square-animation/square-animation.component";
+import { Pagination } from "./types/Pagination";
+import { State } from "./types/State";
 
 @Component({
   selector: "app-root",
@@ -15,9 +21,14 @@ import { SquareAnimationComponent } from "./ui/square-animation/square-animation
   standalone: true,
 })
 export class AppComponent implements OnInit {
-  constructor(private pokemonService: PokemonService, private store: Store) {}
+  private pagination$!: Observable<Pagination>;
+  private store: Store<State> = inject(Store);
 
   ngOnInit(): void {
+    this.pagination$ = this.store.pipe<Pagination>(select("pagination"));
     this.store.dispatch(loadPokemons());
+    this.pagination$.subscribe((pagination: Pagination) =>
+      this.store.dispatch(loadPaginatedPokemons({ payload: pagination }))
+    );
   }
 }

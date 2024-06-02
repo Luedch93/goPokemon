@@ -19,12 +19,6 @@
 } @if (pokemonState && pokemonState.detailedPaginatedList.length > 0) {
 
 <div id="footer">
-  @if (pagination$ | async; as pagination) { @if (pokemonState.showPagination) {
-  <pagination
-    [pagination]="pagination"
-    (clickNext)="handleNext()"
-    (clickPrevious)="handlePrevious()"
-  ></pagination>
-  } }
+  <app-pokemon-pagination></app-pokemon-pagination>
 </div>
 } }

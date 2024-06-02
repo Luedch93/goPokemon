@@ -14,13 +14,15 @@
 }
 
 @media (min-width: 425px) {
-  #card--container {
+  #card--container,
+  #footer {
     width: 390px;
   }
 }
 
 @media (min-width: 1024px) {
-  #card--container {
+  #card--container,
+  #footer {
     width: 520px;
   }
   #footer {
@@ -29,13 +31,15 @@
 }
 
 @media (min-width: 1440px) {
-  #card--container {
+  #card--container,
+  #footer {
     width: 650px;
   }
 }
 
 @media (min-width: 2560px) {
-  #card--container {
+  #card--container,
+  #footer {
     width: 1300px;
   }
 }

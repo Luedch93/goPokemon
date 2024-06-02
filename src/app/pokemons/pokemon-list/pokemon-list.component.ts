@@ -5,12 +5,7 @@ import { AsyncPipe } from "@angular/common";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 
-import {
-  clickPokemon,
-  newFilter,
-  nextPage,
-  previousPage,
-} from "../../store/actions/load.actions";
+import { clickPokemon, newFilter } from "../../store/actions/load.actions";
 import { Pagination } from "../../types/Pagination";
 import { PokemonState, State } from "../../types/State";
 import { PokemonDetailsResponse } from "../../types/PokemonDetailsResponse";
@@ -20,6 +15,7 @@ import { PaginationComponent } from "src/app/ui/pagination/pagination.component"
 import { NotFoundCardComponent } from "src/app/ui/not-found-card/not-found-card.component";
 import { selectPokemonsState } from "src/app/store/selectors/pokemons.selectors";
 import { selectPaginationState } from "src/app/store/selectors/pagination.selectors";
+import { PokemonPaginationComponent } from "../pokemon-pagination/pokemon-pagination.component";
 
 @Component({
   selector: "app-pokemon-list",
@@ -31,6 +27,7 @@ import { selectPaginationState } from "src/app/store/selectors/pagination.select
     PokeCardComponent,
     PaginationComponent,
     NotFoundCardComponent,
+    PokemonPaginationComponent,
   ],
   standalone: true,
 })
@@ -49,13 +46,5 @@ export class PokemonListComponent {
 
   handleFilter(value: string) {
     this.store.dispatch(newFilter({ payload: value }));
-  }
-
-  handleNext() {
-    this.store.dispatch(nextPage());
-  }
-
-  handlePrevious() {
-    this.store.dispatch(previousPage());
   }
 }

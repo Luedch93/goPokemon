@@ -8,8 +8,7 @@ import {
   loadPaginatedPokemons,
   loadPokemonsSuccess,
   newFilter,
-  previousPage,
-  nextPage,
+  setPage,
 } from "../actions/load.actions";
 import { Pagination } from "../../types/Pagination";
 import { PokemonListItem } from "../../types/PokemonListResponse";
@@ -29,6 +28,7 @@ export const saveInitialState = "";
 export const paginatorInitialState: Pagination = {
   limit: 20,
   page: 1,
+  total: 0,
 };
 
 export const previousState = "";
@@ -81,16 +81,14 @@ export const paginationReducer = createReducer(
       limit: payload,
     };
   }),
-  on(previousPage, (state) => {
+  on(setPage, (state, { payload }) => {
     return {
       ...state,
-      page: state.page - 1,
+      page: payload,
     };
   }),
-  on(nextPage, (state) => {
-    return {
-      ...state,
-      page: state.page + 1,
-    };
-  })
+  on(loadPokemonsSuccess, (state, { payload }) => ({
+    ...state,
+    total: payload.count,
+  }))
 );

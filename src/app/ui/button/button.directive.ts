@@ -1,4 +1,10 @@
-import { Directive, ElementRef, OnInit, inject } from "@angular/core";
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  OnInit,
+  inject,
+} from "@angular/core";
 
 @Directive({
   selector: "button[appButton]",
@@ -9,9 +15,6 @@ export class ButtonDirective implements OnInit {
   el = this.elRef.nativeElement as HTMLElement;
 
   ngOnInit(): void {
-    this.el.style.backgroundColor = "#8a2be2";
-    this.el.style.padding = "5px 15px";
-    this.el.style.color = "white";
-    this.el.style.borderRadius = "15px";
+    this.el.classList.add("app-button");
   }
 }

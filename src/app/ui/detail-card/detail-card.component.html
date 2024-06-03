@@ -11,19 +11,19 @@
   <div class="card--bar"></div>
   <div class="slot--container">
     @for (type of types; track type.slot) {
-    <type-slot [type]="type"></type-slot>
+      <type-slot [type]="type"></type-slot>
     }
   </div>
 
   <div class="card--heightWeight">
     <div class="height">
       <span class="title">Height</span>
-      <span>{{ pokemon.height | weightHeight : "height" }}</span>
+      <span>{{ pokemon.height | weightHeight: "height" }}</span>
     </div>
     <div class="bar"></div>
     <div class="weight">
       <span class="title">Weight</span>
-      <span>{{ pokemon.weight | weightHeight : "weight" }}</span>
+      <span>{{ pokemon.weight | weightHeight: "weight" }}</span>
     </div>
   </div>
 

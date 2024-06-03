@@ -1,12 +1,12 @@
 <div style="display: flex; gap: 10px; flex-wrap: wrap">
   @for (page of numberOfPages$ | async; track $index) {
-  <button
-    type="button"
-    style="text-align: center; display: inline-block"
-    [appButton]
-    (click)="pageSelected(page)"
-  >
-    {{ page }}
-  </button>
+    <button
+      type="button"
+      style="text-align: center; display: inline-block"
+      [appButton]
+      (click)="pageSelected(page)"
+    >
+      {{ page }}
+    </button>
   }
 </div>

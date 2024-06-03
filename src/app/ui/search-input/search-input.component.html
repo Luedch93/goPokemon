@@ -1,15 +1,16 @@
 <div style="position: relative">
   @if (loading$ | async; as loader) {
-  <input
-    type="text"
-    [placeholder]="
-      loader.isLoading ? 'Loading...' : 'Enter the name of a pokemon'
-    "
-    [class.disabled]="loader.isLoading"
-    [readonly]="loader.isLoading"
-    [formControl]="filterField"
-  />
-  } @if (value.length > 0) {
-  <div id="closeBtn" (click)="cleanFilter()">x</div>
+    <input
+      type="text"
+      [placeholder]="
+        loader.isLoading ? 'Loading...' : 'Enter the name of a pokemon'
+      "
+      [class.disabled]="loader.isLoading"
+      [readonly]="loader.isLoading"
+      [formControl]="filterField"
+    />
+  }
+  @if (value.length > 0) {
+    <div id="closeBtn" (click)="cleanFilter()">x</div>
   }
 </div>

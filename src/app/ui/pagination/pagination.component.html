@@ -1,10 +1,10 @@
 @if (pagination) {
-<div id="navigation">
-  @if (previousPageAvailable()) {
-  <button (click)="handlePrevious()">Previous</button>
-  } @else {
-  <button disabled>Previous</button>
-  }
-  <button (click)="handleNext()">Next</button>
-</div>
+  <div id="navigation">
+    @if (previousPageAvailable()) {
+      <button (click)="handlePrevious()">Previous</button>
+    } @else {
+      <button disabled>Previous</button>
+    }
+    <button (click)="handleNext()">Next</button>
+  </div>
 }

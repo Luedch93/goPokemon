@@ -1,19 +1,20 @@
 <div [@enterAnimation] class="card">
-  @if (!loading) { @if (pokemon) {
-  <img
-    [ngSrc]="pokemon.id + '.png'"
-    width="96"
-    height="96"
-    alt="Pokemon front sprite"
-    priority
-  />
-  }
-  <h4>{{ pokemon.name | titlecase }}</h4>
+  @if (!loading) {
+    @if (pokemon) {
+      <img
+        [ngSrc]="pokemon.id + '.png'"
+        width="96"
+        height="96"
+        alt="Pokemon front sprite"
+        priority
+      />
+    }
+    <h4>{{ pokemon.name | titlecase }}</h4>
   } @else {
-  <div class="skeleton-cark">
-    <app-skeleton-square height="96px" width="96px"></app-skeleton-square>
-    <app-skeleton-square height="10px" width="100%"></app-skeleton-square>
-  </div>
+    <div class="skeleton-cark">
+      <app-skeleton-square height="96px" width="96px"></app-skeleton-square>
+      <app-skeleton-square height="10px" width="100%"></app-skeleton-square>
+    </div>
   }
   <div class="card--bar"></div>
 </div>

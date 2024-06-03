@@ -12,7 +12,7 @@ export class WeightHeightPipe implements PipeTransform {
     } else {
       valueToString = `${valueToString.substring(
         0,
-        valueToString.length - 1
+        valueToString.length - 1,
       )},${valueToString[valueToString.length - 1]}`;
     }
     if (type === "height") {

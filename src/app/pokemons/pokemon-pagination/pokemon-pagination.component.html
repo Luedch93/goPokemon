@@ -1,12 +1,23 @@
-<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<div class="pagination-container">
   @for (page of numberOfPages$ | async; track $index) {
-    <button
-      type="button"
-      style="text-align: center; display: inline-block"
-      [appButton]
-      (click)="pageSelected(page)"
-    >
-      {{ page }}
-    </button>
+    @if (page !== 0) {
+      <button
+        type="button"
+        [class.active]="(currentPage$ | async) === page"
+        [appButton]
+        (click)="pageSelected(page)"
+      >
+        {{ page }}
+      </button>
+    } @else {
+      <button
+        type="button"
+        style="pointer-events: none"
+        tabindex="0"
+        [appButton]
+      >
+        ...
+      </button>
+    }
   }
 </div>

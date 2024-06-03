@@ -7,7 +7,10 @@ import { map } from "rxjs/operators";
 
 import { PaginationHelperService } from "src/app/services/pagination-helper.service";
 import { newPage } from "src/app/store/actions/load.actions";
-import { selectPaginationState } from "src/app/store/selectors/pagination.selectors";
+import {
+  selectPaginationPage,
+  selectPaginationState,
+} from "src/app/store/selectors/pagination.selectors";
 import { State } from "src/app/types/State";
 import { ButtonDirective } from "src/app/ui/button/button.directive";
 
@@ -30,6 +33,7 @@ export class PokemonPaginationComponent {
         this.paginationHelper.getPages(total, limit, page),
       ),
     );
+  currentPage$ = this.state.select(selectPaginationPage);
 
   pageSelected(pageNumber: number) {
     this.state.dispatch(newPage({ payload: pageNumber }));

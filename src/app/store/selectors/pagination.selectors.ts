@@ -7,9 +7,9 @@ export const selectPaginationState =
 
 export const selectPaginationLimit = createSelector(
   selectPaginationState,
-  (paginationState) => paginationState.limit
+  (paginationState) => paginationState.limit,
 );
 export const selectPaginationPage = createSelector(
   selectPaginationState,
-  (paginationState) => paginationState.page
+  (paginationState) => paginationState.page,
 );

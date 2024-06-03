@@ -4,18 +4,13 @@
       <button
         type="button"
         [class.active]="(currentPage$ | async) === page"
-        [appButton]
+        appButton
         (click)="pageSelected(page)"
       >
         {{ page }}
       </button>
     } @else {
-      <button
-        type="button"
-        style="pointer-events: none"
-        tabindex="0"
-        [appButton]
-      >
+      <button type="button" style="pointer-events: none" tabindex="0" appButton>
         ...
       </button>
     }

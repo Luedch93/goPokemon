@@ -9,6 +9,6 @@ fdescribe("PaginationHelperService", () => {
   it("should", () => {
     const result = service.getPages(10, 3, 1);
 
-    expect(result).toBe([1, 2, 3, 4, 5, 0, 10]);
+    expect(result).toEqual([1, 2, 3, 4, 5, 0, 10]);
   });
 });

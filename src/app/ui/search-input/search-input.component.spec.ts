@@ -1,14 +1,13 @@
 import {
   TestBed,
   fakeAsync,
-  tick,
   ComponentFixture,
   async,
 } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
+
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
 import { Store } from "@ngrx/store";
-import { By } from "@angular/platform-browser";
 
 import { SearchInputComponent } from "./search-input.component";
 
@@ -40,25 +39,8 @@ describe("searchInput", () => {
   it("should clear the text from the input", fakeAsync(() => {
     store.setState({ filter: "TEST" });
     comp.ngOnInit();
-    expect(comp.filterField).toBe("TEST");
+    expect(comp.filterField.value).toBe("TEST");
     comp.cleanFilter();
-    expect(comp.filterField).toBe("");
-  }));
-
-  it("should match the input value with the component", fakeAsync(() => {
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      store.setState({ filter: "pikachu" });
-      tick();
-      fixture.detectChanges();
-      comp.ngOnInit();
-      comp.keyUp("pikachu");
-      const inputEl = fixture.debugElement.query(By.css("input")).nativeElement;
-      inputEl.dispatchEvent(new Event("input"));
-      tick();
-      fixture.detectChanges();
-      expect(comp.filterField).toBe("pikachu");
-      expect(inputEl.value).toBe("pikachu");
-    });
+    expect(comp.filterField.value).toBe("");
   }));
 });

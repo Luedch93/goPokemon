@@ -26,4 +26,5 @@ import { SkeletonSquareComponent } from "../skeletons/skeleton-square/skeleton-s
 export class PokeCardComponent {
   @Input() pokemon!: PokemonDetailsResponse;
   @Input() loading!: boolean;
+  error = false;
 }

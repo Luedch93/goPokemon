@@ -1,3 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+search-input {
+  width: 260px;
+}
+
 #card--container {
   width: 260px;
   display: flex;
@@ -9,7 +21,7 @@
 }
 
 #footer {
-  margin: 15px 0;
+  margin: 15px;
   padding-bottom: 30px;
 }
 

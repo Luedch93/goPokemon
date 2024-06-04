@@ -1,15 +1,26 @@
 <div [@enterAnimation] class="card">
   @if (!loading) {
     @if (pokemon) {
-      <img
-        [ngSrc]="pokemon.id + '.png'"
-        width="96"
-        height="96"
-        alt="Pokemon front sprite"
-        priority
-      />
+      @if (!error) {
+        <img
+          #cardImage
+          width="96"
+          height="96"
+          alt="Pokemon front sprite"
+          priority
+          [ngSrc]="pokemon.id + '.png'"
+          (error)="error = true"
+        />
+      } @else {
+        <img
+          src="/assets/surprised_pikachu.svg"
+          width="60"
+          height="60"
+          alt="Not found image"
+        />
+      }
     }
-    <h4>{{ pokemon.name | titlecase }}</h4>
+    <h4 [title]="pokemon.name">{{ pokemon.name | titlecase }}</h4>
   } @else {
     <div class="skeleton-cark">
       <app-skeleton-square height="96px" width="96px"></app-skeleton-square>

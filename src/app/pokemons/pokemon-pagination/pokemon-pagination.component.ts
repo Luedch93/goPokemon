@@ -1,8 +1,10 @@
 import { AsyncPipe } from "@angular/common";
-import { Component, inject } from "@angular/core";
+import { Component, OnInit, inject } from "@angular/core";
+import { Router } from "@angular/router";
 
 import { Store } from "@ngrx/store";
 
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 import { PaginationHelperService } from "src/app/services/pagination-helper.service";
@@ -22,20 +24,26 @@ import { ButtonDirective } from "src/app/ui/button/button.directive";
   templateUrl: "./pokemon-pagination.component.html",
   styleUrl: "./pokemon-pagination.component.scss",
 })
-export class PokemonPaginationComponent {
+export class PokemonPaginationComponent implements OnInit {
+  numberOfPages$!: Observable<number[]>;
+  currentPage$!: Observable<number>;
   private readonly state = inject(Store<State>);
   private readonly paginationHelper = inject(PaginationHelperService);
+  private readonly router = inject(Router);
 
-  numberOfPages$ = this.state
-    .select(selectPaginationState)
-    .pipe(
-      map(({ total, limit, page }) =>
-        this.paginationHelper.getPages(total, limit, page),
-      ),
-    );
-  currentPage$ = this.state.select(selectPaginationPage);
+  ngOnInit(): void {
+    this.numberOfPages$ = this.state
+      .select(selectPaginationState)
+      .pipe(
+        map(({ total, limit, page }) =>
+          this.paginationHelper.getPages(total, limit, page),
+        ),
+      );
+    this.currentPage$ = this.state.select(selectPaginationPage);
+  }
 
   pageSelected(pageNumber: number) {
     this.state.dispatch(newPage({ payload: pageNumber }));
+    this.router.navigate([""], { queryParams: { page: pageNumber } });
   }
 }

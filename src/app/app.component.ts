@@ -1,17 +1,20 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { ActivatedRoute, RouterOutlet } from "@angular/router";
 
-import { Store, select } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 
-import { Observable } from "rxjs";
+import { debounceTime } from "rxjs/operators";
 
 import {
   loadPaginatedPokemons,
   loadPokemons,
+  newPage,
 } from "./store/actions/load.actions";
 import { SquareAnimationComponent } from "./ui/square-animation/square-animation.component";
 import { Pagination } from "./types/Pagination";
 import { State } from "./types/State";
+import { selectPaginationState } from "./store/selectors/pagination.selectors";
+import { selectPokemonsLoading } from "./store/selectors/pokemons.selectors";
 
 @Component({
   selector: "app-root",
@@ -21,14 +24,24 @@ import { State } from "./types/State";
   standalone: true,
 })
 export class AppComponent implements OnInit {
-  private pagination$!: Observable<Pagination>;
   private store: Store<State> = inject(Store);
+  private readonly activatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    this.pagination$ = this.store.pipe<Pagination>(select("pagination"));
     this.store.dispatch(loadPokemons());
-    this.pagination$.subscribe((pagination: Pagination) =>
-      this.store.dispatch(loadPaginatedPokemons({ payload: pagination }))
-    );
+
+    this.store.select(selectPokemonsLoading);
+
+    this.activatedRoute.queryParams.subscribe(({ page }) => {
+      if (!page) return;
+      this.store.dispatch(newPage({ payload: Number.parseInt(page, 10) }));
+    });
+
+    this.store
+      .select(selectPaginationState)
+      .pipe(debounceTime(500))
+      .subscribe((pagination: Pagination) =>
+        this.store.dispatch(loadPaginatedPokemons({ payload: pagination })),
+      );
   }
 }

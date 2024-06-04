@@ -1,7 +1,7 @@
 .card {
   color: black;
   background-color: white;
-  width: 120px;
+  width: 110px;
   height: 150px;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@
   border-radius: 10px;
   margin: 5px 5px;
   transition: transform 0.1s linear;
+  padding: 0 5px;
   cursor: pointer;
   img {
     image-rendering: -moz-crisp-edges;
@@ -18,6 +19,14 @@
     -ms-interpolation-mode: nearest-neighbor;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+  }
+
+  h4 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: inherit;
+    text-align: center;
   }
 }
 

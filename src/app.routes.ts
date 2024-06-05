@@ -5,5 +5,10 @@ import { PokemonListComponent } from "./app/pokemons/pokemon-list/pokemon-list.c
 
 export const routes: Routes = [
   { path: "", component: PokemonListComponent },
-  { path: "pokemon/:name", component: PokemonDetailComponent },
+  {
+    path: "pokemon",
+    loadChildren: async () =>
+      (await import("./app/pokemons/pokemon-detail/pokemon-detail.routes"))
+        .routes,
+  },
 ];

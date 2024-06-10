@@ -10,6 +10,7 @@ export type PokemonDetailsResponse = {
   sprites: Sprite;
   stats: Stat[];
   types: Type[];
+  cries: Cries;
 };
 
 export type Sprite = {
@@ -39,3 +40,8 @@ export type Type = {
     url: string;
   };
 };
+
+export type Cries = {
+  legacy: string;
+  latest: string;
+}

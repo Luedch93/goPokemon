@@ -28,4 +28,16 @@
   </div>
 
   <stat-chart [stats]="pokemon.stats"></stat-chart>
+
+  <h2 class="sound-title">Sounds:</h2>
+  <div class="sound-container">
+    <app-sound-button
+      text="Legacy"
+      [fileUrl]="pokemon.cries.legacy"
+    ></app-sound-button>
+    <app-sound-button
+      text="Latest"
+      [fileUrl]="pokemon.cries.latest"
+    ></app-sound-button>
+  </div>
 </div>

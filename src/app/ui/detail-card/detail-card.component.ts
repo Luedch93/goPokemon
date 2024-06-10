@@ -7,7 +7,7 @@ import {
 } from "src/app/types/PokemonDetailsResponse";
 import { StatChartComponent } from "../stat-chart/stat-chart.component";
 import { TypeSlotComponent } from "../type-slot/type-slot.component";
-import { StatBarComponent } from "../stat-bar/stat-bar.component";
+import { SoundButtonComponent } from "../sound-button/sound-button.component";
 
 @Component({
   selector: "detail-card",
@@ -20,6 +20,7 @@ import { StatBarComponent } from "../stat-bar/stat-bar.component";
     StatChartComponent,
     TypeSlotComponent,
     StatChartComponent,
+    SoundButtonComponent,
   ],
   standalone: true,
 })

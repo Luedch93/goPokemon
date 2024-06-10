@@ -27,7 +27,7 @@ export class PokemonDetailComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private service: FetchService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class PokemonDetailComponent implements OnInit {
           .getPokemonDetailsByName(this.pokemonName)
           .pipe(
             take(1),
-            finalize(() => (this.loading = false))
+            finalize(() => (this.loading = false)),
           )
           .subscribe(
             (pokemon) => {
@@ -49,7 +49,7 @@ export class PokemonDetailComponent implements OnInit {
             },
             (err) => {
               console.error(err);
-            }
+            },
           );
       }
     });

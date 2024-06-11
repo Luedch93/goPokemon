@@ -15,12 +15,23 @@ import { PokemonListItem } from "../../types/PokemonListResponse";
 import { PokemonState } from "../../types/State";
 
 export const initialLoadState: PokemonState = {
-  total: 0,
-  pokemons: [],
-  detailedPaginatedList: [],
-  loading: true,
+  pokemons: {
+    data: [],
+    loaded: false,
+    loading: false,
+    total: 0,
+  },
+  detailedPaginatedList: {
+    data: [],
+    loading: false,
+    loaded: false,
+  },
+  selectedPokemon: {
+    data: undefined,
+    loaded: false,
+    loading: false,
+  },
   filter: "",
-  selectedPokemon: undefined,
   showPagination: true,
 };
 export const saveInitialState = "";
@@ -41,20 +52,30 @@ export const loadReducer = createReducer(
     loadPaginatedPokemons,
     (state): PokemonState => ({
       ...state,
-      loading: true,
+      detailedPaginatedList: {
+        ...state.detailedPaginatedList,
+        loading: true,
+      },
     }),
   ),
   on(loadPaginatedPokemonsSuccess, (state, { payload }) => ({
     ...state,
-    loading: false,
-    detailedPaginatedList: payload,
+    detailedPaginatedList: {
+      data: payload,
+      loading: false,
+      loaded: true,
+    },
   })),
   on(loadPokemonsSuccess, (state, { payload }) => ({
     ...state,
-    pokemons: payload.results.map(
-      (pokemonsListItem: PokemonListItem) => pokemonsListItem.name,
-    ),
-    total: payload.count,
+    pokemons: {
+      data: payload.results.map(
+        (pokemonsListItem: PokemonListItem) => pokemonsListItem.name,
+      ),
+      total: payload.count,
+      loaded: true,
+      loading: true,
+    },
   })),
   on(newFilter, (state, { payload }) => ({
     ...state,
@@ -63,7 +84,11 @@ export const loadReducer = createReducer(
   })),
   on(clickPokemon, (state, { payload }) => ({
     ...state,
-    selectedPokemon: payload,
+    selectedPokemon: {
+      data: payload,
+      loaded: true,
+      loading: false,
+    },
   })),
 );
 

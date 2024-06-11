@@ -2,12 +2,23 @@ import { Pagination } from "./Pagination";
 import { PokemonDetailsResponse } from "./PokemonDetailsResponse";
 
 export type PokemonState = {
-  total: number;
-  pokemons: string[];
-  detailedPaginatedList: PokemonDetailsResponse[];
-  loading: boolean;
+  pokemons: {
+    data: string[];
+    total: number;
+    loading: boolean;
+    loaded: boolean;
+  };
+  detailedPaginatedList: {
+    data: PokemonDetailsResponse[];
+    loading: boolean;
+    loaded: boolean;
+  };
   filter: string;
-  selectedPokemon?: PokemonDetailsResponse;
+  selectedPokemon: {
+    data: PokemonDetailsResponse | undefined;
+    loading: boolean;
+    loaded: boolean;
+  };
   showPagination: boolean;
 };
 

@@ -20,7 +20,17 @@ import { SearchInputComponent } from "src/app/ui/search-input/search-input.compo
 import { PokeCardComponent } from "src/app/ui/poke-card/poke-card.component";
 import { PaginationComponent } from "src/app/ui/pagination/pagination.component";
 import { NotFoundCardComponent } from "src/app/ui/not-found-card/not-found-card.component";
-import { selectPokemonsState } from "src/app/store/selectors/pokemons.selectors";
+import {
+  selectPaginationStateAndDetailsListLoaded,
+  selectPokemonsDetailsListData,
+  selectPokemonsDetailsListLength,
+  selectPokemonsDetailsListLoaded,
+  selectPokemonsDetailsListLoading,
+  selectPokemonsFilter,
+  selectPokemonsListData,
+  selectPokemonsLoading,
+  selectPokemonsState,
+} from "src/app/store/selectors/pokemons.selectors";
 import { selectPaginationState } from "src/app/store/selectors/pagination.selectors";
 import { PokemonPaginationComponent } from "../pokemon-pagination/pokemon-pagination.component";
 
@@ -43,14 +53,29 @@ export class PokemonListComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  pokemons$: Observable<PokemonState> = this.store.select(selectPokemonsState);
+  pokemonList$: Observable<string[]> = this.store.select(
+    selectPokemonsListData,
+  );
+  pokemonInputFilter$: Observable<string> =
+    this.store.select(selectPokemonsFilter);
+  pokemonDetailedPaginatedListLoading$: Observable<boolean> = this.store.select(
+    selectPokemonsDetailsListLoading,
+  );
+  pokemonDetailedPaginatedList$: Observable<PokemonDetailsResponse[]> =
+    this.store.select(selectPokemonsDetailsListData);
+  pokemonDetailedPaginatedListLength$: Observable<number> = this.store.select(
+    selectPokemonsDetailsListLength,
+  );
+  pokemonDetailedPaginatedListLoaded$: Observable<boolean> = this.store.select(
+    selectPokemonsDetailsListLoaded,
+  );
   pagination$: Observable<Pagination> = this.store.select(
     selectPaginationState,
   );
 
   ngOnInit(): void {
-    this.pokemons$
-      .pipe(filter((pokemonState) => pokemonState.pokemons.length === 0))
+    this.pokemonList$
+      .pipe(filter((pokemons) => pokemons.length === 0))
       .subscribe(() => {
         this.store.dispatch(loadPokemons());
       });
@@ -62,14 +87,9 @@ export class PokemonListComponent implements OnInit {
     });
 
     this.store
-      .select(selectPaginationState)
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(
-          (newState, prevState) => newState.page === prevState.page,
-        ),
-      )
-      .subscribe((pagination: Pagination) => {
+      .select(selectPaginationStateAndDetailsListLoaded)
+      .pipe(filter(({ detailListLoaded }) => detailListLoaded === false))
+      .subscribe(({ pagination }) => {
         this.store.dispatch(loadPaginatedPokemons({ payload: pagination }));
       });
   }

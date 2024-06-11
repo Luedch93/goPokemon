@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
+
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 import { EMPTY } from "rxjs";
-import { catchError, map, mergeMap } from "rxjs/operators";
+import { catchError, map, mergeMap, switchMap } from "rxjs/operators";
 
 import { FetchService } from "../../services/fetch.service";
 import {
@@ -23,12 +24,12 @@ export class PokemonsEffects {
       mergeMap(({ payload: pagination }) =>
         this.fetchService.getPaginatedPokemons(pagination).pipe(
           map((pokemonDetailsList: PokemonDetailsResponse[]) =>
-            loadPaginatedPokemonsSuccess({ payload: pokemonDetailsList })
+            loadPaginatedPokemonsSuccess({ payload: pokemonDetailsList }),
           ),
-          catchError(() => EMPTY)
-        )
-      )
-    )
+          catchError(() => EMPTY),
+        ),
+      ),
+    ),
   );
 
   loadPokemonListResponse$ = createEffect(() =>
@@ -39,11 +40,11 @@ export class PokemonsEffects {
           .getPokemons()
           .pipe(
             map((pokemonsListResponse: PokemonListResponse) =>
-              loadPokemonsSuccess({ payload: pokemonsListResponse })
-            )
-          )
-      )
-    )
+              loadPokemonsSuccess({ payload: pokemonsListResponse }),
+            ),
+          ),
+      ),
+    ),
   );
 
   searchPokemons$ = createEffect(() =>
@@ -55,21 +56,24 @@ export class PokemonsEffects {
             .getLatestsPaginationValues()
             .pipe(
               map((pokemonDetailsList: PokemonDetailsResponse[]) =>
-                loadPaginatedPokemonsSuccess({ payload: pokemonDetailsList })
-              )
+                loadPaginatedPokemonsSuccess({ payload: pokemonDetailsList }),
+              ),
             );
         } else {
           return this.fetchService
             .searchPokemons(name)
             .pipe(
               map((pokemonDetailsList: PokemonDetailsResponse[]) =>
-                loadPaginatedPokemonsSuccess({ payload: pokemonDetailsList })
-              )
+                loadPaginatedPokemonsSuccess({ payload: pokemonDetailsList }),
+              ),
             );
         }
-      })
-    )
+      }),
+    ),
   );
 
-  constructor(private actions$: Actions, private fetchService: FetchService) {}
+  constructor(
+    private actions$: Actions,
+    private fetchService: FetchService,
+  ) {}
 }

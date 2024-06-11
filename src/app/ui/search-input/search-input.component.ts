@@ -14,7 +14,10 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 
-import { selectPokemonsLoading } from "src/app/store/selectors/pokemons.selectors";
+import {
+  selectPokemonsDetailsListLoading,
+  selectPokemonsLoading,
+} from "src/app/store/selectors/pokemons.selectors";
 import { State } from "src/app/types/State";
 
 @Component({
@@ -31,7 +34,7 @@ export class SearchInputComponent implements OnInit {
   filterField!: FormControl;
   filter$!: Observable<string>;
   loading$ = this.state
-    .select(selectPokemonsLoading)
+    .select(selectPokemonsDetailsListLoading)
     .pipe(map((isLoading) => ({ isLoading })));
 
   ngOnInit() {
@@ -43,7 +46,7 @@ export class SearchInputComponent implements OnInit {
       .pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        map((value) => value.toLocaleLowerCase())
+        map((value) => value.toLocaleLowerCase()),
       )
       .subscribe((value: string) => {
         this.newFilter.emit(value);

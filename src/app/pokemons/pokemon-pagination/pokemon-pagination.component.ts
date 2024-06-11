@@ -5,14 +5,18 @@ import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 
 import { PaginationHelperService } from "src/app/services/pagination-helper.service";
-import { newPage } from "src/app/store/actions/load.actions";
+import {
+  loadPaginatedPokemons,
+  newPage,
+} from "src/app/store/actions/load.actions";
 import {
   selectPaginationPage,
   selectPaginationState,
 } from "src/app/store/selectors/pagination.selectors";
+import { Pagination } from "src/app/types/Pagination";
 import { State } from "src/app/types/State";
 import { ButtonDirective } from "src/app/ui/button/button.directive";
 
@@ -27,6 +31,7 @@ import { ButtonDirective } from "src/app/ui/button/button.directive";
 export class PokemonPaginationComponent implements OnInit {
   numberOfPages$!: Observable<number[]>;
   currentPage$!: Observable<number>;
+  paginationState$!: Observable<Pagination>;
   private readonly state = inject(Store<State>);
   private readonly paginationHelper = inject(PaginationHelperService);
   private readonly router = inject(Router);
@@ -40,10 +45,14 @@ export class PokemonPaginationComponent implements OnInit {
         ),
       );
     this.currentPage$ = this.state.select(selectPaginationPage);
+    this.paginationState$ = this.state.select(selectPaginationState);
   }
 
   pageSelected(pageNumber: number) {
     this.state.dispatch(newPage({ payload: pageNumber }));
     this.router.navigate([""], { queryParams: { page: pageNumber } });
+    this.paginationState$.pipe(take(1)).subscribe((pagination) => {
+      this.state.dispatch(loadPaginatedPokemons({ payload: pagination }));
+    });
   }
 }

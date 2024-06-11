@@ -1,25 +1,24 @@
-@if (pokemons$ | async; as pokemonState) {
-  <search-input
-    [value]="pokemonState.filter"
-    (newFilter)="handleFilter($event)"
-  ></search-input>
-  <div id="card--container">
-    @for (pokemon of pokemonState.detailedPaginatedList; track pokemon.id) {
-      <poke-card
-        [pokemon]="pokemon"
-        [loading]="pokemonState.loading"
-        (click)="showDetail(pokemon)"
-      ></poke-card>
-    }
+<search-input
+  [value]="pokemonInputFilter$ | async"
+  (newFilter)="handleFilter($event)"
+></search-input>
+<div id="card--container">
+  @for (pokemon of pokemonDetailedPaginatedList$ | async; track pokemon.id) {
+    <poke-card
+      [pokemon]="pokemon"
+      [loading]="pokemonDetailedPaginatedListLoading$ | async"
+      (click)="showDetail(pokemon)"
+    ></poke-card>
+  }
+</div>
+@if (
+  (pokemonDetailedPaginatedListLoaded$ | async) === true &&
+  (pokemonDetailedPaginatedListLength$ | async) === 0
+) {
+  <not-found-card></not-found-card>
+}
+@if ($any(pokemonDetailedPaginatedListLength$ | async) > 0) {
+  <div id="footer">
+    <app-pokemon-pagination></app-pokemon-pagination>
   </div>
-  @if (
-    !pokemonState.loading && pokemonState.detailedPaginatedList.length === 0
-  ) {
-    <not-found-card></not-found-card>
-  }
-  @if (pokemonState && pokemonState.detailedPaginatedList.length > 0) {
-    <div id="footer">
-      <app-pokemon-pagination></app-pokemon-pagination>
-    </div>
-  }
 }

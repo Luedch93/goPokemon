@@ -11,7 +11,7 @@ import { PokemonDetailsResponse } from "../../types/PokemonDetailsResponse";
 import { FetchService } from "../../services/fetch.service";
 import { DetailCardComponent } from "src/app/ui/detail-card/detail-card.component";
 import { NotFoundCardComponent } from "src/app/ui/not-found-card/not-found-card.component";
-import { selectPokemonSelected } from "src/app/store/selectors/pokemons.selectors";
+import { selectSelectedPokemonData } from "src/app/store/selectors/pokemons.selectors";
 
 @Component({
   selector: "app-pokemon-detail",
@@ -30,7 +30,7 @@ export class PokemonDetailComponent {
     private service: FetchService,
     private route: ActivatedRoute,
   ) {
-    this.pokemonSelected$ = this.store.select(selectPokemonSelected);
+    this.pokemonSelected$ = this.store.select(selectSelectedPokemonData);
     const pokemonName = this.route.snapshot.paramMap.get("name") ?? "";
 
     this.pokemonSelected$

@@ -39,12 +39,3 @@ export const selectPokemonSelected = createSelector(
   selectPokemonsState,
   (pokemonState) => pokemonState.selectedPokemon,
 );
-
-export const selectLoadingAndPokemonSelected = createSelector(
-  selectPokemonsLoading,
-  selectPokemonSelected,
-  (loading, pokemonSelected) => ({
-    loading,
-    pokemonSelected,
-  }),
-);

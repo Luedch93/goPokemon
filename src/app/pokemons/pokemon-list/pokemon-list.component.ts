@@ -1,11 +1,18 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit, inject } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AsyncPipe } from "@angular/common";
 
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
+import { debounceTime, distinctUntilChanged, filter } from "rxjs/operators";
 
-import { clickPokemon, newFilter } from "../../store/actions/load.actions";
+import {
+  clickPokemon,
+  loadPaginatedPokemons,
+  loadPokemons,
+  newFilter,
+  newPage,
+} from "../../store/actions/load.actions";
 import { Pagination } from "../../types/Pagination";
 import { PokemonState, State } from "../../types/State";
 import { PokemonDetailsResponse } from "../../types/PokemonDetailsResponse";
@@ -31,13 +38,41 @@ import { PokemonPaginationComponent } from "../pokemon-pagination/pokemon-pagina
   ],
   standalone: true,
 })
-export class PokemonListComponent {
+export class PokemonListComponent implements OnInit {
+  private readonly store = inject(Store<State>);
+  private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
+
   pokemons$: Observable<PokemonState> = this.store.select(selectPokemonsState);
   pagination$: Observable<Pagination> = this.store.select(
-    selectPaginationState
+    selectPaginationState,
   );
 
-  constructor(private store: Store<State>, private router: Router) {}
+  ngOnInit(): void {
+    this.pokemons$
+      .pipe(filter((pokemonState) => pokemonState.pokemons.length === 0))
+      .subscribe(() => {
+        this.store.dispatch(loadPokemons());
+      });
+
+    this.activatedRoute.queryParams.subscribe(({ page }) => {
+      if (!page) return;
+
+      this.store.dispatch(newPage({ payload: Number.parseInt(page, 10) }));
+    });
+
+    this.store
+      .select(selectPaginationState)
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(
+          (newState, prevState) => newState.page === prevState.page,
+        ),
+      )
+      .subscribe((pagination: Pagination) => {
+        this.store.dispatch(loadPaginatedPokemons({ payload: pagination }));
+      });
+  }
 
   public showDetail(pokemon: PokemonDetailsResponse) {
     this.store.dispatch(clickPokemon({ payload: pokemon }));

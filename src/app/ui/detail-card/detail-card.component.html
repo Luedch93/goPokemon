@@ -1,43 +1,77 @@
 <div id="detail-card">
   <ng-content select="a"></ng-content>
-  <img
-    [ngSrc]="pokemon.id + '.png'"
-    alt="Pokemon Sprite"
-    width="96"
-    height="96"
-    priority
-  />
-  <h1>{{ pokemon.name | titlecase }}</h1>
+  @if (!loading) {
+    <img
+      [ngSrc]="pokemon.id + '.png'"
+      alt="Pokemon Sprite"
+      width="96"
+      height="96"
+      priority
+    />
+  } @else {
+    <app-skeleton-square height="96px" width="96px"></app-skeleton-square>
+  }
+  @if (!loading) {
+    <h1>{{ pokemon.name | titlecase }}</h1>
+  } @else {
+    <app-skeleton-square height="12px" width="150px"></app-skeleton-square>
+  }
   <div class="card--bar"></div>
-  <div class="slot--container">
-    @for (type of types; track type.slot) {
-      <type-slot [type]="type"></type-slot>
-    }
-  </div>
 
-  <div class="card--heightWeight">
-    <div class="height">
-      <span class="title">Height</span>
-      <span>{{ pokemon.height | weightHeight: "height" }}</span>
+  @if (!loading) {
+    <div class="slot--container">
+      @for (type of types; track type.slot) {
+        <type-slot [type]="type"></type-slot>
+      }
     </div>
-    <div class="bar"></div>
-    <div class="weight">
-      <span class="title">Weight</span>
-      <span>{{ pokemon.weight | weightHeight: "weight" }}</span>
+  } @else {
+    <app-skeleton-square
+      class="slot-skeleton"
+      height="12px"
+      width="150px"
+    ></app-skeleton-square>
+  }
+
+  @if (!loading) {
+    <div class="card--heightWeight">
+      <div class="height">
+        <span class="title">Height</span>
+        <span>{{ pokemon.height | weightHeight: "height" }}</span>
+      </div>
+      <div class="bar"></div>
+      <div class="weight">
+        <span class="title">Weight</span>
+        <span>{{ pokemon.weight | weightHeight: "weight" }}</span>
+      </div>
     </div>
-  </div>
+  } @else {
+    <div class="stats-container-skeleton">
+      <app-skeleton-square height="46px" width="96px"></app-skeleton-square>
+      <app-skeleton-square height="46px" width="96px"></app-skeleton-square>
+    </div>
+  }
 
-  <stat-chart [stats]="pokemon.stats"></stat-chart>
+  @if (!loading) {
+    <stat-chart [stats]="pokemon.stats"></stat-chart>
+  } @else {
+    <app-skeleton-square
+      class="stats-skeleton"
+      height="200px"
+      width="150px"
+    ></app-skeleton-square>
+  }
 
-  <h2 class="sound-title">Sounds:</h2>
-  <div class="sound-container">
-    <app-sound-button
-      text="Legacy"
-      [fileUrl]="pokemon.cries.legacy"
-    ></app-sound-button>
-    <app-sound-button
-      text="Latest"
-      [fileUrl]="pokemon.cries.latest"
-    ></app-sound-button>
-  </div>
+  @if (!loading) {
+    <h2 class="sound-title">Sounds:</h2>
+    <div class="sound-container">
+      <app-sound-button
+        text="Legacy"
+        [fileUrl]="pokemon.cries.legacy"
+      ></app-sound-button>
+      <app-sound-button
+        text="Latest"
+        [fileUrl]="pokemon.cries.latest"
+      ></app-sound-button>
+    </div>
+  }
 </div>

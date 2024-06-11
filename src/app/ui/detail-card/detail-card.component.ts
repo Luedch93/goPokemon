@@ -1,5 +1,6 @@
 import { NgOptimizedImage, TitleCasePipe } from "@angular/common";
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input, SimpleChanges, OnChanges } from "@angular/core";
+
 import { WeightHeightPipe } from "src/app/pipes/weight-height.pipe";
 import {
   PokemonDetailsResponse,
@@ -8,6 +9,7 @@ import {
 import { StatChartComponent } from "../stat-chart/stat-chart.component";
 import { TypeSlotComponent } from "../type-slot/type-slot.component";
 import { SoundButtonComponent } from "../sound-button/sound-button.component";
+import { SkeletonSquareComponent } from "../skeletons/skeleton-square/skeleton-square.component";
 
 @Component({
   selector: "detail-card",
@@ -21,16 +23,24 @@ import { SoundButtonComponent } from "../sound-button/sound-button.component";
     TypeSlotComponent,
     StatChartComponent,
     SoundButtonComponent,
+    SkeletonSquareComponent,
   ],
   standalone: true,
 })
-export class DetailCardComponent implements OnInit {
-  @Input() pokemon!: PokemonDetailsResponse;
-  types!: Type[];
+export class DetailCardComponent implements OnChanges {
+  @Input({ required: true }) pokemon!: PokemonDetailsResponse;
+  @Input({ required: true }) loading = false;
+  types: Type[] = [];
 
-  constructor() {}
+  ngOnChanges(changes: SimpleChanges) {
+    const { pokemon } = changes;
 
-  ngOnInit() {
+    if (pokemon && pokemon.currentValue) {
+      this.updateTypes();
+    }
+  }
+
+  updateTypes() {
     this.types = this.pokemon.types.map((type: any) => {
       return type.type.name;
     });

@@ -1,9 +1,7 @@
 <div id="detail">
-  @if (pokemon) {
-    <detail-card [pokemon]="pokemon">
-      <a class="detail-link" routerLink="/">Go back</a>
-    </detail-card>
-  }
+  <detail-card [pokemon]="pokemon" [loading]="loading">
+    <a class="detail-link" routerLink="/">Go back</a>
+  </detail-card>
   @if (!loading && !pokemon) {
     <not-found-card></not-found-card>
   }

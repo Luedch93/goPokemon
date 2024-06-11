@@ -42,7 +42,7 @@ export const loadReducer = createReducer(
     (state): PokemonState => ({
       ...state,
       loading: true,
-    })
+    }),
   ),
   on(loadPaginatedPokemonsSuccess, (state, { payload }) => ({
     ...state,
@@ -52,7 +52,7 @@ export const loadReducer = createReducer(
   on(loadPokemonsSuccess, (state, { payload }) => ({
     ...state,
     pokemons: payload.results.map(
-      (pokemonsListItem: PokemonListItem) => pokemonsListItem.name
+      (pokemonsListItem: PokemonListItem) => pokemonsListItem.name,
     ),
     total: payload.count,
   })),
@@ -64,7 +64,7 @@ export const loadReducer = createReducer(
   on(clickPokemon, (state, { payload }) => ({
     ...state,
     selectedPokemon: payload,
-  }))
+  })),
 );
 
 export const paginationReducer = createReducer(
@@ -90,5 +90,5 @@ export const paginationReducer = createReducer(
   on(loadPokemonsSuccess, (state, { payload }) => ({
     ...state,
     total: payload.count,
-  }))
+  })),
 );

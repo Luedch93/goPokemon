@@ -74,3 +74,24 @@
   gap: 10px;
   margin: 15px 0;
 }
+
+// Skeleton state
+.skeleton-image {
+  width: 96px;
+  height: 96px;
+}
+
+app-skeleton-square {
+  margin-bottom: 5px;
+}
+
+app-skeleton-square.slot-skeleton {
+  margin-top: 5px;
+}
+
+.stats-container-skeleton {
+  display: flex;
+  margin: 5px 0;
+  gap: 10px;
+}
+// End skeleton state

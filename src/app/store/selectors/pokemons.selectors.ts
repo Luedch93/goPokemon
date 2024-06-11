@@ -7,30 +7,44 @@ export const selectPokemonsState =
 
 export const selectPokemonsTotal = createSelector(
   selectPokemonsState,
-  (pokemonState) => pokemonState.total
+  (pokemonState) => pokemonState.total,
 );
 
 export const selectPokemonsList = createSelector(
   selectPokemonsState,
-  (pokemonState) => pokemonState.pokemons
+  (pokemonState) => pokemonState.pokemons,
 );
 
 export const selectPokemonsDetailsList = createSelector(
   selectPokemonsState,
-  (pokemonState) => pokemonState.detailedPaginatedList
+  (pokemonState) => pokemonState.detailedPaginatedList,
 );
 
 export const selectPokemonsLoading = createSelector(
   selectPokemonsState,
-  (pokemonState) => pokemonState.loading
+  (pokemonState) => pokemonState.loading,
 );
 
 export const selectPokemonsFilter = createSelector(
   selectPokemonsState,
-  (pokemonState) => pokemonState.filter
+  (pokemonState) => pokemonState.filter,
 );
 
 export const selectPokemonsShowPagination = createSelector(
   selectPokemonsState,
-  (pokemonState) => pokemonState.showPagination
+  (pokemonState) => pokemonState.showPagination,
+);
+
+export const selectPokemonSelected = createSelector(
+  selectPokemonsState,
+  (pokemonState) => pokemonState.selectedPokemon,
+);
+
+export const selectLoadingAndPokemonSelected = createSelector(
+  selectPokemonsLoading,
+  selectPokemonSelected,
+  (loading, pokemonSelected) => ({
+    loading,
+    pokemonSelected,
+  }),
 );

@@ -30,8 +30,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadPokemons());
 
-    this.store.select(selectPokemonsLoading);
-
     this.activatedRoute.queryParams.subscribe(({ page }) => {
       if (!page) return;
       this.store.dispatch(newPage({ payload: Number.parseInt(page, 10) }));

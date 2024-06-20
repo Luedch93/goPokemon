@@ -95,6 +95,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   public showDetail(pokemon: PokemonDetailsResponse) {
+    if (!pokemon.name) return;
     this.store.dispatch(clickPokemon({ payload: pokemon }));
     return this.router.navigate(["pokemon", pokemon.name]);
   }

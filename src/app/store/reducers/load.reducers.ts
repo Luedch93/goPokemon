@@ -13,6 +13,9 @@ import {
 import { Pagination } from "../../types/Pagination";
 import { PokemonListItem } from "../../types/PokemonListResponse";
 import { PokemonState } from "../../types/State";
+import { emptyDetails } from "src/app/models/pokemon-details.model";
+
+const LIMIT = 20;
 
 export const initialLoadState: PokemonState = {
   pokemons: {
@@ -22,7 +25,7 @@ export const initialLoadState: PokemonState = {
     total: 0,
   },
   detailedPaginatedList: {
-    data: [],
+    data: [...Array(20)].map(() => emptyDetails()),
     loading: false,
     loaded: false,
   },
@@ -37,7 +40,7 @@ export const initialLoadState: PokemonState = {
 export const saveInitialState = "";
 
 export const paginatorInitialState: Pagination = {
-  limit: 20,
+  limit: LIMIT,
   page: 1,
   total: 0,
 };

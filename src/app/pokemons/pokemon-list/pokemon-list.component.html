@@ -5,6 +5,7 @@
 <div id="card--container">
   @for (pokemon of pokemonDetailedPaginatedList$ | async; track pokemon.id) {
     <poke-card
+      [class.no-events]="pokemonDetailedPaginatedListLoading$ | async"
       [pokemon]="pokemon"
       [loading]="pokemonDetailedPaginatedListLoading$ | async"
       (click)="showDetail(pokemon)"

@@ -35,6 +35,7 @@ export type Stat = {
 
 export type Type = {
   slot: number;
+  name: string;
   type: {
     name: string;
     url: string;
@@ -44,4 +45,4 @@ export type Type = {
 export type Cries = {
   legacy: string;
   latest: string;
-}
+};

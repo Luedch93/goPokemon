@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -20,15 +20,15 @@ import { selectSelectedPokemonData } from "src/app/store/selectors/pokemons.sele
     imports: [RouterLink, DetailCardComponent, NotFoundCardComponent]
 })
 export class PokemonDetailComponent {
+  private store = inject<Store<State>>(Store);
+  private service = inject(FetchService);
+  private route = inject(ActivatedRoute);
+
   pokemonSelected$!: Observable<PokemonDetailsResponse | undefined>;
   pokemon?: PokemonDetailsResponse;
   loading = true;
 
-  constructor(
-    private store: Store<State>,
-    private service: FetchService,
-    private route: ActivatedRoute,
-  ) {
+  constructor() {
     this.pokemonSelected$ = this.store.select(selectSelectedPokemonData);
     const pokemonName = this.route.snapshot.paramMap.get("name") ?? "";
 

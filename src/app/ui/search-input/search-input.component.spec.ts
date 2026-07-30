@@ -1,35 +1,34 @@
 import {
   TestBed,
   fakeAsync,
+  tick,
   ComponentFixture,
-  async,
+  waitForAsync,
 } from "@angular/core/testing";
-import { FormsModule } from "@angular/forms";
 
 import { provideMockStore, MockStore } from "@ngrx/store/testing";
-import { Store } from "@ngrx/store";
 
 import { SearchInputComponent } from "./search-input.component";
 
 describe("searchInput", () => {
   let comp: SearchInputComponent;
-  let store: MockStore<any>;
+  let store: MockStore;
   let fixture: ComponentFixture<SearchInputComponent>;
-  const initialState: any = { filter: "" };
+  const initialState = { filter: "" };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [SearchInputComponent],
-      providers: [SearchInputComponent, provideMockStore(initialState)],
+      imports: [SearchInputComponent],
+      providers: [provideMockStore({ initialState })],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
+    store = TestBed.inject(MockStore);
     store.setState({ filter: "" });
     fixture = TestBed.createComponent(SearchInputComponent);
-    comp = TestBed.get(SearchInputComponent);
+    comp = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it("should be created", () => {
@@ -37,10 +36,12 @@ describe("searchInput", () => {
   });
 
   it("should clear the text from the input", fakeAsync(() => {
-    store.setState({ filter: "TEST" });
+    comp.value = "TEST";
     comp.ngOnInit();
+    tick(500);
     expect(comp.filterField.value).toBe("TEST");
     comp.cleanFilter();
+    tick(500);
     expect(comp.filterField.value).toBe("");
   }));
 });

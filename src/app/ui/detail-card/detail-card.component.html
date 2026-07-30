@@ -21,7 +21,7 @@
   @if (!loading) {
     <div class="slot--container">
       @for (type of types; track type.slot) {
-        <type-slot [type]="type.type.name"></type-slot>
+        <type-slot [type]="type.name"></type-slot>
       }
     </div>
   } @else {

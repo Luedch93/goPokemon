@@ -3,11 +3,10 @@ import { Component, HostListener, Input } from "@angular/core";
 import { ButtonDirective } from "../button/button.directive";
 
 @Component({
-  selector: "app-sound-button",
-  standalone: true,
-  imports: [ButtonDirective],
-  templateUrl: "./sound-button.component.html",
-  styleUrl: "./sound-button.component.scss",
+    selector: "app-sound-button",
+    imports: [ButtonDirective],
+    templateUrl: "./sound-button.component.html",
+    styleUrl: "./sound-button.component.scss"
 })
 export class SoundButtonComponent {
   @Input({ required: true }) text!: string;

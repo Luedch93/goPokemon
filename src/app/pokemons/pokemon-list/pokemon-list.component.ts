@@ -35,18 +35,17 @@ import { selectPaginationState } from "src/app/store/selectors/pagination.select
 import { PokemonPaginationComponent } from "../pokemon-pagination/pokemon-pagination.component";
 
 @Component({
-  selector: "app-pokemon-list",
-  templateUrl: "./pokemon-list.component.html",
-  styleUrls: ["./pokemon-list.component.scss"],
-  imports: [
-    AsyncPipe,
-    SearchInputComponent,
-    PokeCardComponent,
-    PaginationComponent,
-    NotFoundCardComponent,
-    PokemonPaginationComponent,
-  ],
-  standalone: true,
+    selector: "app-pokemon-list",
+    templateUrl: "./pokemon-list.component.html",
+    styleUrls: ["./pokemon-list.component.scss"],
+    imports: [
+        AsyncPipe,
+        SearchInputComponent,
+        PokeCardComponent,
+        PaginationComponent,
+        NotFoundCardComponent,
+        PokemonPaginationComponent,
+    ]
 })
 export class PokemonListComponent implements OnInit {
   private readonly store = inject(Store<State>);

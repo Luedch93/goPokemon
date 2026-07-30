@@ -21,12 +21,11 @@ import { State } from "src/app/types/State";
 import { ButtonDirective } from "src/app/ui/button/button.directive";
 
 @Component({
-  selector: "app-pokemon-pagination",
-  standalone: true,
-  imports: [AsyncPipe, ButtonDirective],
-  providers: [PaginationHelperService],
-  templateUrl: "./pokemon-pagination.component.html",
-  styleUrl: "./pokemon-pagination.component.scss",
+    selector: "app-pokemon-pagination",
+    imports: [AsyncPipe, ButtonDirective],
+    providers: [PaginationHelperService],
+    templateUrl: "./pokemon-pagination.component.html",
+    styleUrl: "./pokemon-pagination.component.scss"
 })
 export class PokemonPaginationComponent implements OnInit {
   numberOfPages$!: Observable<number[]>;

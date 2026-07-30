@@ -14,11 +14,10 @@ import { NotFoundCardComponent } from "src/app/ui/not-found-card/not-found-card.
 import { selectSelectedPokemonData } from "src/app/store/selectors/pokemons.selectors";
 
 @Component({
-  selector: "app-pokemon-detail",
-  templateUrl: "./pokemon-detail.component.html",
-  styleUrls: ["./pokemon-detail.component.scss"],
-  imports: [RouterLink, DetailCardComponent, NotFoundCardComponent],
-  standalone: true,
+    selector: "app-pokemon-detail",
+    templateUrl: "./pokemon-detail.component.html",
+    styleUrls: ["./pokemon-detail.component.scss"],
+    imports: [RouterLink, DetailCardComponent, NotFoundCardComponent]
 })
 export class PokemonDetailComponent {
   pokemonSelected$!: Observable<PokemonDetailsResponse | undefined>;

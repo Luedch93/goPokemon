@@ -12,20 +12,19 @@ import { SoundButtonComponent } from "../sound-button/sound-button.component";
 import { SkeletonSquareComponent } from "../skeletons/skeleton-square/skeleton-square.component";
 
 @Component({
-  selector: "detail-card",
-  templateUrl: "./detail-card.component.html",
-  styleUrls: ["./detail-card.component.scss"],
-  imports: [
-    TitleCasePipe,
-    NgOptimizedImage,
-    WeightHeightPipe,
-    StatChartComponent,
-    TypeSlotComponent,
-    StatChartComponent,
-    SoundButtonComponent,
-    SkeletonSquareComponent,
-  ],
-  standalone: true,
+    selector: "detail-card",
+    templateUrl: "./detail-card.component.html",
+    styleUrls: ["./detail-card.component.scss"],
+    imports: [
+        TitleCasePipe,
+        NgOptimizedImage,
+        WeightHeightPipe,
+        StatChartComponent,
+        TypeSlotComponent,
+        StatChartComponent,
+        SoundButtonComponent,
+        SkeletonSquareComponent,
+    ]
 })
 export class DetailCardComponent implements OnChanges {
   @Input({ required: true }) pokemon!: PokemonDetailsResponse;

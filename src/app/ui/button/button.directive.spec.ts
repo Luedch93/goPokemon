@@ -4,9 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ButtonDirective } from './button.directive';
 
 @Component({
-  template: '<button appButton></button>',
-  standalone: true,
-  imports: [ButtonDirective],
+    template: '<button appButton></button>',
+    imports: [ButtonDirective]
 })
 class TestComponent {}
 

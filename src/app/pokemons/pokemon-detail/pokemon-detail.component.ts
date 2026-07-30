@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, ChangeDetectionStrategy } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
@@ -14,10 +14,11 @@ import { NotFoundCardComponent } from "src/app/ui/not-found-card/not-found-card.
 import { selectSelectedPokemonData } from "src/app/store/selectors/pokemons.selectors";
 
 @Component({
-    selector: "app-pokemon-detail",
-    templateUrl: "./pokemon-detail.component.html",
-    styleUrls: ["./pokemon-detail.component.scss"],
-    imports: [RouterLink, DetailCardComponent, NotFoundCardComponent]
+  selector: "app-pokemon-detail",
+  templateUrl: "./pokemon-detail.component.html",
+  styleUrls: ["./pokemon-detail.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [RouterLink, DetailCardComponent, NotFoundCardComponent],
 })
 export class PokemonDetailComponent {
   private store = inject<Store<State>>(Store);

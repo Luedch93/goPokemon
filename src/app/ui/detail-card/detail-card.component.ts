@@ -1,5 +1,11 @@
 import { NgOptimizedImage, TitleCasePipe } from "@angular/common";
-import { Component, Input, SimpleChanges, OnChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  SimpleChanges,
+  OnChanges,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 
 import { WeightHeightPipe } from "src/app/pipes/weight-height.pipe";
 import {
@@ -12,19 +18,20 @@ import { SoundButtonComponent } from "../sound-button/sound-button.component";
 import { SkeletonSquareComponent } from "../skeletons/skeleton-square/skeleton-square.component";
 
 @Component({
-    selector: "detail-card",
-    templateUrl: "./detail-card.component.html",
-    styleUrls: ["./detail-card.component.scss"],
-    imports: [
-        TitleCasePipe,
-        NgOptimizedImage,
-        WeightHeightPipe,
-        StatChartComponent,
-        TypeSlotComponent,
-        StatChartComponent,
-        SoundButtonComponent,
-        SkeletonSquareComponent,
-    ]
+  selector: "detail-card",
+  templateUrl: "./detail-card.component.html",
+  styleUrls: ["./detail-card.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [
+    TitleCasePipe,
+    NgOptimizedImage,
+    WeightHeightPipe,
+    StatChartComponent,
+    TypeSlotComponent,
+    StatChartComponent,
+    SoundButtonComponent,
+    SkeletonSquareComponent,
+  ],
 })
 export class DetailCardComponent implements OnChanges {
   @Input({ required: true }) pokemon!: PokemonDetailsResponse;

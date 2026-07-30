@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
   inject,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 
@@ -21,10 +22,11 @@ import {
 import { State } from "src/app/types/State";
 
 @Component({
-    selector: "search-input",
-    templateUrl: "./search-input.component.html",
-    styleUrls: ["./search-input.component.scss"],
-    imports: [ReactiveFormsModule, AsyncPipe]
+  selector: "search-input",
+  templateUrl: "./search-input.component.html",
+  styleUrls: ["./search-input.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [ReactiveFormsModule, AsyncPipe],
 })
 export class SearchInputComponent implements OnInit {
   state = inject(Store<State>);

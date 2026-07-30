@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ChangeDetectionStrategy } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ButtonDirective } from './button.directive';
+import { ButtonDirective } from "./button.directive";
 
 @Component({
-    template: '<button appButton></button>',
-    imports: [ButtonDirective]
+  template: "<button appButton></button>",
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [ButtonDirective],
 })
 class TestComponent {}
 
-describe('ButtonDirective', () => {
+describe("ButtonDirective", () => {
   let fixture: ComponentFixture<TestComponent>;
 
   beforeEach(async () => {
@@ -21,8 +22,8 @@ describe('ButtonDirective', () => {
     fixture.detectChanges();
   });
 
-  it('should create an instance', () => {
-    const button = fixture.nativeElement.querySelector('button');
-    expect(button.classList.contains('app-button')).toBeTrue();
+  it("should create an instance", () => {
+    const button = fixture.nativeElement.querySelector("button");
+    expect(button.classList.contains("app-button")).toBeTrue();
   });
 });

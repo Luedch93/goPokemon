@@ -1,6 +1,6 @@
 import { bootstrapApplication } from "@angular/platform-browser";
 import { provideRouter } from "@angular/router";
-import { provideHttpClient } from "@angular/common/http";
+import { provideHttpClient, withXhr } from "@angular/common/http";
 import { provideImgixLoader } from "@angular/common";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { isDevMode, provideZoneChangeDetection } from "@angular/core";
@@ -40,7 +40,7 @@ bootstrapApplication(AppComponent, {
     provideZoneChangeDetection(),
     provideAnimations(),
     provideImgixLoader(POKEMON_SPRITES_URL),
-    provideHttpClient(),
+    provideHttpClient(withXhr()),
     provideRouter(routes),
     provideStore({
       pokemons: loadReducer,

@@ -1,11 +1,17 @@
 import { NgStyle } from "@angular/common";
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 
 @Component({
-    selector: "stat-bar",
-    templateUrl: "./stat-bar.component.html",
-    styleUrls: ["./stat-bar.component.scss"],
-    imports: [NgStyle]
+  selector: "stat-bar",
+  templateUrl: "./stat-bar.component.html",
+  styleUrls: ["./stat-bar.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [NgStyle],
 })
 export class StatBarComponent implements OnInit {
   @Input() stat!: number;

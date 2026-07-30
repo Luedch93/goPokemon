@@ -1,5 +1,11 @@
 import { NgOptimizedImage, TitleCasePipe } from "@angular/common";
-import { Component, Input, SimpleChanges, OnChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  SimpleChanges,
+  OnChanges,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 
 import { WeightHeightPipe } from "src/app/pipes/weight-height.pipe";
 import {
@@ -15,6 +21,7 @@ import { SkeletonSquareComponent } from "../skeletons/skeleton-square/skeleton-s
   selector: "detail-card",
   templateUrl: "./detail-card.component.html",
   styleUrls: ["./detail-card.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     TitleCasePipe,
     NgOptimizedImage,
@@ -25,7 +32,6 @@ import { SkeletonSquareComponent } from "../skeletons/skeleton-square/skeleton-s
     SoundButtonComponent,
     SkeletonSquareComponent,
   ],
-  standalone: true,
 })
 export class DetailCardComponent implements OnChanges {
   @Input({ required: true }) pokemon!: PokemonDetailsResponse;

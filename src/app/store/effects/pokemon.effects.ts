@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 
@@ -18,6 +18,9 @@ import { PokemonListResponse } from "../../types/PokemonListResponse";
 
 @Injectable()
 export class PokemonsEffects {
+  private actions$ = inject(Actions);
+  private fetchService = inject(FetchService);
+
   loadDetailedPokemons$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadPaginatedPokemons),
@@ -71,9 +74,4 @@ export class PokemonsEffects {
       }),
     ),
   );
-
-  constructor(
-    private actions$: Actions,
-    private fetchService: FetchService,
-  ) {}
 }

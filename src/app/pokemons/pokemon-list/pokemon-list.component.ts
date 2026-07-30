@@ -1,4 +1,9 @@
-import { Component, OnInit, inject } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  inject,
+  ChangeDetectionStrategy,
+} from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AsyncPipe } from "@angular/common";
 
@@ -38,6 +43,7 @@ import { PokemonPaginationComponent } from "../pokemon-pagination/pokemon-pagina
   selector: "app-pokemon-list",
   templateUrl: "./pokemon-list.component.html",
   styleUrls: ["./pokemon-list.component.scss"],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     AsyncPipe,
     SearchInputComponent,
@@ -46,7 +52,6 @@ import { PokemonPaginationComponent } from "../pokemon-pagination/pokemon-pagina
     NotFoundCardComponent,
     PokemonPaginationComponent,
   ],
-  standalone: true,
 })
 export class PokemonListComponent implements OnInit {
   private readonly store = inject(Store<State>);

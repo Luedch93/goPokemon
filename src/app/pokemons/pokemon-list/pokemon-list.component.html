@@ -1,13 +1,13 @@
 <search-input
-  [value]="pokemonInputFilter$ | async"
+  [value]="(pokemonInputFilter$ | async) ?? ''"
   (newFilter)="handleFilter($event)"
 ></search-input>
 <div id="card--container">
   @for (pokemon of pokemonDetailedPaginatedList$ | async; track pokemon.id) {
     <poke-card
-      [class.no-events]="pokemonDetailedPaginatedListLoading$ | async"
+      [class.no-events]="!!(pokemonDetailedPaginatedListLoading$ | async)"
       [pokemon]="pokemon"
-      [loading]="pokemonDetailedPaginatedListLoading$ | async"
+      [loading]="(pokemonDetailedPaginatedListLoading$ | async) === true"
       (click)="showDetail(pokemon)"
     ></poke-card>
   }

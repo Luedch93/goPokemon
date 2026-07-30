@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
 import { trigger, style, animate, transition } from "@angular/animations";
 import { NgOptimizedImage } from "@angular/common";
 
@@ -18,7 +18,7 @@ import { NgOptimizedImage } from "@angular/common";
       ]),
     ]),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NgOptimizedImage],
-  standalone: true,
 })
 export class NotFoundCardComponent {}

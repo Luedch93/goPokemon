@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { forkJoin, Observable, of } from "rxjs";
 import { switchMap, take, tap } from "rxjs/operators";
@@ -15,10 +15,13 @@ import { State } from "../types/State";
   providedIn: "root",
 })
 export class FetchService {
+  private http = inject(HttpClient);
+  private store = inject<Store<State>>(Store);
+
   private readonly API_URL = "https://pokeapi.co/api/v2";
   private pokemonListResponse?: PokemonListResponse;
 
-  constructor(private http: HttpClient, private store: Store<State>) {
+  constructor() {
     const cachedResponse = localStorage.getItem("PokemonListResponse");
     if (cachedResponse) {
       this.pokemonListResponse = JSON.parse(cachedResponse);

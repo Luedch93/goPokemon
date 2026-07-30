@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ChangeDetectionStrategy } from "@angular/core";
 import { trigger, style, animate, transition } from "@angular/animations";
 import { PokemonDetailsResponse } from "src/app/types/PokemonDetailsResponse";
 import { NgOptimizedImage, TitleCasePipe } from "@angular/common";
@@ -20,8 +20,8 @@ import { SkeletonSquareComponent } from "../skeletons/skeleton-square/skeleton-s
       ]),
     ]),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [TitleCasePipe, NgOptimizedImage, SkeletonSquareComponent],
-  standalone: true,
 })
 export class PokeCardComponent {
   @Input() pokemon!: PokemonDetailsResponse;

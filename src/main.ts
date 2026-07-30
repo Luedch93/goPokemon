@@ -3,7 +3,7 @@ import { provideRouter } from "@angular/router";
 import { provideHttpClient } from "@angular/common/http";
 import { provideImgixLoader } from "@angular/common";
 import { provideAnimations } from "@angular/platform-browser/animations";
-import { isDevMode } from "@angular/core";
+import { isDevMode, provideZoneChangeDetection } from "@angular/core";
 
 import { provideStore } from "@ngrx/store";
 import { provideEffects } from "@ngrx/effects";
@@ -37,6 +37,7 @@ if (isDevMode()) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideZoneChangeDetection(),
     provideAnimations(),
     provideImgixLoader(POKEMON_SPRITES_URL),
     provideHttpClient(),

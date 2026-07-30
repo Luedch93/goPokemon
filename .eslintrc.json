@@ -26,7 +26,8 @@
           "error",
           {
             "style": "kebab-case",
-            "type": "element"
+            "type": "element",
+            "prefix": ["app", "detail", "not-found", "pagination", "poke", "search", "stat", "type"]
           }
         ],
         "@angular-eslint/directive-selector": [
